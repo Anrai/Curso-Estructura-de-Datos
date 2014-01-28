@@ -1,8 +1,9 @@
-// Nombre del programa: llenarArreglo
+// Nombre del programa: Ejercicio While #6
+// Descripción: Suponga que se tiene un conjunto de calificaciones de un grupo de 40 alumnos. Realizar un algoritmo para calcular la calificación media y la calificación más baja de todo el grupo.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 27-Enero-2014                                       
+// Fecha: 28-Enero-2014                                       
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -11,49 +12,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 using namespace std;
 
-void llena_arreglo(int a[10], int k)
-{
-   int i=0;
-      while(i<k)
-    {
-      printf("\n teclee el numero: ",i);
-      scanf("%d",&a[i]);
-      i++;  
-    } 
-}
-void escribe_arreglo(int a[10], int k)
-{
-     int i=0;
-    while(i<k)
-    {
-      printf("\n x[%d]:%d\n",k,a[i]);
-      i++;        
-    }
-}
-
 //--------------------------------------------------------------------------------------- 
 // Programa Principal 
-//--------------------------------------------------------------------------------------- 
-int main(int argc, const char** argv)
-{
-    int a[10],b[10],c[10];
-    int i,j,k;
-    
-    printf("Numero de elementos: ");
-    scanf("%i",&k);
-    
-    llena_arreglo(a,k);// Cuando se quiere que se pase y se modifique en la funcion se pasa con & y se utiliza el valor con un *
-    escribe_arreglo(a,k);
-    
-    llena_arreglo(b,k);// Cuando se quiere que se pase y se modifique en la funcion se pasa con & y se utiliza el valor con un *
-    escribe_arreglo(b,k);
-    
-    llena_arreglo(c,k);// Cuando se quiere que se pase y se modifique en la funcion se pasa con & y se utiliza el valor con un *
-    escribe_arreglo(c,k);
+//---------------------------------------------------------------------------------------
+int main(int argc, char** argv) {
 
-    system("pause");
-    return 0;
+	int i = 0;
+	float calificacionBaja=100, sumaCalificaciones=0, calificacion;
+
+	while (i<40)
+	{
+		cout << "\n\nIngrese la cantidad del alumno no. " << i+1 << ":";
+		cin >> calificacion;
+
+		sumaCalificaciones+=calificacion;
+
+		if (calificacion < calificacionBaja)
+			calificacionBaja=calificacion;
+
+		i+=1;
+	}
+
+	cout << "\n\nEl promedio de calificaciones es de: " << sumaCalificaciones/40;
+	cout << "\nLa calificacion mas baja es de: " << calificacionBaja;
+
+	system("pause");
+	return 0;
 }
