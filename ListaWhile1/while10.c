@@ -1,4 +1,4 @@
-// Nombre del programa: Ejercicio While #8
+// Nombre del programa: Ejercicio While #10
 // Descripción: Al cerrar un expendio de naranjas, 15 clientes que aun no han pagado recibirán un 15% de descuento si compan más de 10 kilos.
 //              Determinar cuánto pagará cada cliente y cuánto percibirá la tienda por esas compras.
 // Responsables: 

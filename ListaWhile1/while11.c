@@ -1,6 +1,6 @@
-// Nombre del programa: Ejercicio While #8
-// Descripción: Al cerrar un expendio de naranjas, 15 clientes que aun no han pagado recibirán un 15% de descuento si compan más de 10 kilos.
-//              Determinar cuánto pagará cada cliente y cuánto percibirá la tienda por esas compras.
+// Nombre del programa: Ejercicio While #11
+// Descripción: En un centro de verificación de automóviles se desea saber el promedio de puntos contaminantes de los primeros 25 automóviles que lleguen.
+//				Asimismo se desea saber los puntos contaminantes del carro que menos contamino y del que más contaminó.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
@@ -23,24 +23,28 @@ using namespace std;
 int main(int argc, char** argv) {
 
 	int i=0;
-	float compra, peso;
+	float cont, mascont=0, menoscont=999999, sumacont=0;
 
-	while(i<15)
+	while(i<25)
 	{
-		cout << "\n\nIngrese el costo de la compra del cliente:";
-		cin >> compra;
-		cout << "Ingrese el peso de la compra del cliente en kilogramos:";
-		cin >> peso;
+		cout << "\nIngrese los puntos de contaminacion del automovil:";
+		cin >> cont;
 
-		if(peso>10)
-		{
-			cout << "Al cliente se le hara un descuento y tendra que pagar $" << compra*.85;
+		if (cont>mascont)
+		{	
+			mascont=cont;
 		}
-		else
-		{
-			cout << "El cliente tiene que pagar el total que es de $" << compra;
+		if (cont<menoscont)
+		{	
+			menoscont=cont;
 		}
+		sumacont+=cont;
+		i+=1;
 	}
+
+	cout << "\n\nEl promedio de los puntos de contaminacion es: " << sumacont/25;
+	cout << "\nEl auto con mayor puntos de contaminacion tiene " << mascont << "puntos";
+	cout << "\nEl auto con menor puntos de contaminacion tiene " << menoscont << "puntos\n";
 
 	system("pause");
 	return 0;
