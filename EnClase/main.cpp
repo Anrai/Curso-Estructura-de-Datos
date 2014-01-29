@@ -1,6 +1,5 @@
-// Nombre del programa: Ejercicio While #10
-// Descripción: Al cerrar un expendio de naranjas, 15 clientes que aun no han pagado recibirán un 15% de descuento si compan más de 10 kilos.
-//              Determinar cuánto pagará cada cliente y cuánto percibirá la tienda por esas compras.
+// Nombre del programa: Ejercicio While #8
+// Descripción: Simular el comportamiento de un reloj digital, imprimiendo la hora, minutos y segundos de un día desde las 0:00:00 horas hasta las 23:59:59 horas
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
@@ -22,24 +21,38 @@ using namespace std;
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
 
-	int i=0;
-	float compra, peso;
-
-	while(i<15)
-	{
-		cout << "\n\nIngrese el costo de la compra del cliente:";
-		cin >> compra;
-		cout << "Ingrese el peso de la compra del cliente en kilogramos:";
-		cin >> peso;
-
-		if(peso>10)
+	int hora = 0, minuto = 0, segundo = 0;
+	
+	while(hora<24){
+		
+		while(minuto<60)
 		{
-			cout << "Al cliente se le hara un descuento y tendra que pagar $" << compra*.85;
+			while(segundo<60)
+			{
+				if (hora<10)
+				{
+					cout << 0;
+				}
+				cout << hora << ":";
+			
+				if (minuto<10)
+				{
+					cout << 0;
+				}
+				cout << minuto << ":";
+				
+				if (segundo<10)
+				{
+					cout << 0;
+				}
+				cout << segundo << "\n";
+				segundo+=1;
+			}
+			segundo=0;
+			minuto+=1;
 		}
-		else
-		{
-			cout << "El cliente tiene que pagar el total que es de $" << compra;
-		}
+		minuto=0;
+		hora+=1;
 	}
 
 	system("pause");

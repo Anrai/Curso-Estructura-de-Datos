@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 		i+=1;
 	}
 
-	if (noMasde16 && almenos16 && promedioMenor15)
+	if (noMasde16 || almenos16 || promedioMenor15)
 	{
 		cout << "\nEl atleta es apto para la prueba de 5Km";
 	}
