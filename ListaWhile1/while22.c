@@ -1,4 +1,5 @@
 // Nombre del programa: Ejercicio while #22
+// Descripción: Encontrar el mayor valor de un conjunto de n números dados.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 

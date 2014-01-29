@@ -1,4 +1,5 @@
 // Nombre del programa: Ejercicio while #21
+// Descripción: Encontrar el menor valor de un conjunto de n números dados.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 

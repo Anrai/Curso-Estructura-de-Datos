@@ -1,4 +1,6 @@
 // Nombre del programa: Ejercicio while #49
+// Descripción: Diseñe un pseudo código que lea el valor de un ángulo expresado en radianes y calcule e imprima el valor del seno de dicho ángulo.
+// 				Se leerá también el  número de términos de la serie.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 

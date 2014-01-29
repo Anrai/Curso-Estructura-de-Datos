@@ -1,4 +1,6 @@
 // Nombre del programa: Ejercicio while #29
+// Descripción: Calcular el promedio de masa de aire de los neumáticos de n vehículos que están en compostura en un servicio de alineación y balanceo.
+// 				Los vehículos pueden ser motocicletas o automóviles.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 

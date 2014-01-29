@@ -1,4 +1,5 @@
 // Nombre del programa: Ejercicio While #20
+// Descripción: Calcular el promedio de edades de hombres, mujeres y de todo un grupo de alumnos.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 

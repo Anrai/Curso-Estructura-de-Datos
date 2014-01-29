@@ -1,4 +1,5 @@
 // Nombre del programa: Ejercicio arreglos 1-4, 7-9
+// Descripción: Varios ejercicios con arreglos, cada ejercicio se encuentra dentro de una función.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
