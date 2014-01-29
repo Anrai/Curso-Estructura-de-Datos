@@ -50,8 +50,8 @@ void mostrar_arreglo_alreves(int a[10], int k)
 {
     while(k>0)
     {
-    	k-=1;
-		cout << "\n x["<<k<<"]:"<<a[k];
+        k-=1;
+        cout << "\n x["<<k<<"]:"<<a[k];
     }
 }
 
@@ -64,14 +64,14 @@ void mostrar_elemento_central(int a[10], int k)
 
     if(k%2 > 0) // Solo hay un elemento central
     {
-    	x=k/2;
-    	cout << "\nEl elemento central es x["<<x<<"]:"<<a[x];
+        x=k/2;
+        cout << "\nEl elemento central es x["<<x<<"]:"<<a[x];
     }
     else // Hay dos elementos centrales
     {
-    	x=k/2;
-    	y=x-1;
-    	cout << "\nLos elementos centrales son x["<<y<<"]:"<<a[y]<<" y x["<<x<<"]:"<<a[x];
+        x=k/2;
+        y=x-1;
+        cout << "\nLos elementos centrales son x["<<y<<"]:"<<a[y]<<" y x["<<x<<"]:"<<a[x];
     }
 }
 
@@ -80,11 +80,11 @@ void mostrar_elemento_central(int a[10], int k)
 // Calcular la suma de los elementos del arreglo
 int calcular_suma_elementos(int a[10], int k)
 {
-	int suma=0;
+    int suma=0;
     while(k>0)
     {
-    	k-=1;
-		suma+=a[k];
+        k-=1;
+        suma+=a[k];
     }
     return suma;
 }
@@ -94,11 +94,11 @@ int calcular_suma_elementos(int a[10], int k)
 // Calcular la media de los elementos en el vector
 int calcular_media_elementos(int a[10], int k)
 {
-	int suma=0, m=k;
+    int suma=0, m=k;
     while(k>0)
     {
-    	k-=1;
-		suma+=a[k];
+        k-=1;
+        suma+=a[k];
     }
     return suma/m;
 }
@@ -106,19 +106,19 @@ int calcular_media_elementos(int a[10], int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 9
 // Calcular el numero de ocurrencias del numero num dentro del arreglo
-int calcular_media_elementos(int a[10], int k)
+int calcular_ocurrencias(int a[10], int k)
 {
-	int num, ocurrencias=0;
-	cout << "\nQue numero quiere revisar? ";
-	cin >> num;
+    int num, ocurrencias=0;
+    cout << "\nQue numero quiere revisar? ";
+    cin >> num;
 
-	while(k>0)
+    while(k>0)
     {
-    	k-=1;
-		if(a[k]==num)
-		{
-			ocurrencias+=1;
-		}
+        k-=1;
+        if(a[k]==num)
+        {
+            ocurrencias+=1;
+        }
     }
     return ocurrencias;
 }
@@ -130,6 +130,6 @@ int calcular_media_elementos(int a[10], int k)
 int main(int argc, char** argv) {
 
 
-	system("pause");
-	return 0;
+    system("pause");
+    return 0;
 }
