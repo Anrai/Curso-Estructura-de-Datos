@@ -3,7 +3,7 @@
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 28-Enero-2014                                       
+// Fecha: 29-Enero-2014                                       
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -21,24 +21,15 @@ using namespace std;
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
 
-	int i = 0;
-	float calificacionBaja=100, sumaCalificaciones=0, calificacion;
-
-	while (i<40)
+	int i = 1, num;
+	
+	cout << "Ingrese un numero entero del 1 al 9:";
+	cin >> num;
+	while(i<10)
 	{
-		cout << "\n\nIngrese la cantidad del alumno no. " << i+1 << ":";
-		cin >> calificacion;
-
-		sumaCalificaciones+=calificacion;
-
-		if (calificacion < calificacionBaja)
-			calificacionBaja=calificacion;
-
+		cout << num << "x" << i << "=" << i*num << "\n";
 		i+=1;
 	}
-
-	cout << "\n\nEl promedio de calificaciones es de: " << sumaCalificaciones/40;
-	cout << "\nLa calificacion mas baja es de: " << calificacionBaja;
 
 	system("pause");
 	return 0;

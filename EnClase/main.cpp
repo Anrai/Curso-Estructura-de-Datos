@@ -1,9 +1,10 @@
-// Nombre del programa: Ejercicio While #6
-// Descripción: Suponga que se tiene un conjunto de calificaciones de un grupo de 40 alumnos. Realizar un algoritmo para calcular la calificación media y la calificación más baja de todo el grupo.
+// Nombre del programa: Ejercicio While #8
+// Descripción: Al cerrar un expendio de naranjas, 15 clientes que aun no han pagado recibirán un 15% de descuento si compan más de 10 kilos.
+//              Determinar cuánto pagará cada cliente y cuánto percibirá la tienda por esas compras.
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 28-Enero-2014                                       
+// Fecha: 29-Enero-2014                                       
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -21,24 +22,25 @@ using namespace std;
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
 
-	int i = 0;
-	float calificacionBaja=100, sumaCalificaciones=0, calificacion;
+	int i=0;
+	float compra, peso;
 
-	while (i<40)
+	while(i<15)
 	{
-		cout << "\n\nIngrese la cantidad del alumno no. " << i+1 << ":";
-		cin >> calificacion;
+		cout << "\n\nIngrese el costo de la compra del cliente:";
+		cin >> compra;
+		cout << "Ingrese el peso de la compra del cliente en kilogramos:";
+		cin >> peso;
 
-		sumaCalificaciones+=calificacion;
-
-		if (calificacion < calificacionBaja)
-			calificacionBaja=calificacion;
-
-		i+=1;
+		if(peso>10)
+		{
+			cout << "Al cliente se le hara un descuento y tendra que pagar $" << compra*.85;
+		}
+		else
+		{
+			cout << "El cliente tiene que pagar el total que es de $" << compra;
+		}
 	}
-
-	cout << "\n\nEl promedio de calificaciones es de: " << sumaCalificaciones/40;
-	cout << "\nLa calificacion mas baja es de: " << calificacionBaja;
 
 	system("pause");
 	return 0;
