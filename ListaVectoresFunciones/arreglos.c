@@ -17,12 +17,29 @@
 using namespace std;
 
 //--------------------------------------------------------------------------------------- 
+// Detecta si el numero es primo o no
+bool primo(int p)
+{
+    int i;
+
+    if(p<2)
+        return false; 
+
+    for(i=2; i<=sqrt(p); i++)
+    {
+        if(p%i == 0)
+            return false; 
+    }
+    return true
+}
+
+//--------------------------------------------------------------------------------------- 
 // Ejercicio 1
 // Leer un arreglo desde el teclado
 void llena_arreglo(int a[10], int k)
 {
     int i=0;
-      while(i<k)
+    while(i<k)
     {
       printf("\n teclee el numero: ",i);
       scanf("%d",&a[i]);
@@ -166,42 +183,120 @@ int calcular_ocurrencias(int a[10], int k)
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 10
-// Diseñar un algoritmo que inserte de manera ordenada los elementos en un vector (considere que debe buscar la posición de inserción y abrir el hueco para insertar el elemento).
-int (int a[10], int k)
+// Diseñar un algoritmo que inserte de manera ordenada los elementos en un vector (considere que debe buscar
+// la posición de inserción y abrir el hueco para insertar el elemento).
+int * ordenar_arreglo(int *a[10], int k)
 {
+    int i=1, memoria;
 
+    while(i<k)
+    {
+        if(a[i-1] > a[i])
+        {
+            memoria = a[i];
+            a[i] = a[i-1];
+            a[i-1] = memoria;
+        }
+        i+=1;
+    }
+
+    return a;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 11
-// Realizar una búsqueda secuencial de un elemento dentro del arreglo y regresar la posición en donde se encuentra o bien un -1 en caso de que no se encuentre.
-int (int a[10], int k)
+// Realizar una búsqueda secuencial de un elemento dentro del arreglo y regresar la posición en donde se encuentra
+// o bien un -1 en caso de que no se encuentre.
+int busqueda_elemento(int a[10], int k, int elemeno)
 {
+    int i=0;
+    int posicion = -1;
 
+    while(i<k)
+    {
+        if(a[i] == elemento)
+            posicion = i;
+    }
+
+    return posicion;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 12
 // Hacer la suma de dos vectores (elemento a elemento) y almacenar el resultado en un tercer vector.
-int (int a[10], int k)
+int * multiplicacion_arreglos(int a[], int b[], int x, int y)
 {
+    int tamano = y, i=0;
+    if (x>tamano)
+        tamano=x;
 
+    int *multiplicacion[tamano];
+
+    while(i<tamano)
+    {
+        if (i<x && i<y)
+            multiplicacion[i] = a[i]*b[i];
+        else
+            multiplicacion[i]=0;
+        i+=1;
+    }
+
+    return multiplicacion;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 13
-// Sumar los elementos de dos vectores de manera cruzada (el primer elemento del primer vector con el ultimo elemento del segundo, … y almacenar el resultado en un tercer vector de arriba hacia abajo).
-int (int a[10], int k)
+// Sumar los elementos de dos vectores de manera cruzada (el primer elemento del primer vector con el ultimo
+// elemento del segundo, … y almacenar el resultado en un tercer vector de arriba hacia abajo).
+int * suma_cruzada_arreglos(int a[], int b[], int x, int y)
 {
+    int tamano = y, i=0;
+    if (x>tamano)
+        tamano=x;
+    int j=tamano;
 
+    int *suma[tamano];
+
+    while(i<tamano)
+    {
+        j-=1;
+
+        if (x>y)
+        {
+            if (i<y)
+                suma[j] = b[i]+a[j];
+            else
+                suma[j]=a[j];
+        }
+        else
+        {
+            if (i<x)
+                suma[j] = a[i]+b[j];
+            else
+                suma[j]=b[j];
+        }
+
+        i+=1;
+    }
+
+    return suma;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 14
 // Buscar el elemento mayor dentro del vector.
-int (int a[10], int k)
+int elemento_mayor(int a[10], int k)
 {
+    int i=0, mayor=0;
 
+    while(i<k)
+    {
+        if(a[i]>mayor)
+            mayor=a[i];
+        i+=1;
+    }
+
+    return mayor;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -217,54 +312,120 @@ int (int a[10], int k)
 // Calcular la desviación estandar de los elementos del arreglo, con el valor de la media calculado en el problema 8.
 int (int a[10], int k)
 {
+    int i=0, menor=99999999999999999;
 
+    while(i<k)
+    {
+        if(a[i]<menor)
+            menor=a[i];
+        i+=1;
+    }
+
+    return menor;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 17
-// Determinar si cada elemento en el vector es un número primo o no, si todos los elementos son primos contestar que el arreglo es primo, en caso contrario indicar que no lo es.
-int (int a[10], int k)
+// Determinar si cada elemento en el vector es un número primo o no, si todos los elementos son primos contestar
+// que el arreglo es primo, en caso contrario indicar que no lo es.
+bool (int a[10], int k)
 {
+    int i=0;
 
+    while(i<k)
+    {
+        if (!primo(a[i])
+            return false;
+        i+=1;
+    }
+    return true;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 18
 // Determinar si dos vectores son iguales ( para serlo, los elementos en posiciones iguales deberá ser iguales.)
-int (int a[10], int k)
+int arreglo_primo(int a[10], int b[10], int k)
 {
+    int i;
 
+    for (i=0; i<k; i++)
+    {
+        if (a[i] != b[i]);
+            return false;
+    }
+
+    return true;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 19
-// Intercambiar dos elementos cualesquiera dentro del vector, dando como parámetros de entrada los elementos a intercambiar (verifique primero si los elementos están contenidos en el vector para poder intercambiarlos).
-int (int a[10], int k)
+// Intercambiar dos elementos cualesquiera dentro del vector, dando como parámetros de entrada los elementos a intercambiar
+// (verifique primero si los elementos están contenidos en el vector para poder intercambiarlos).
+int *intercambiar_elemenots(int *a[10], int x, int y, int, k)
 {
+    int memoria;
 
+    if (x<k && y<k)
+    {
+        memoria = a[y];
+        a[y]=a[x];
+        a[x]=memoria;
+    }
+    return a;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 20
 // Eliminar un elemento del arreglo, reduciendo el número de elementos almacenados y cerrando el hueco en el vector.
-int (int a[10], int k)
+int *eliminar_elemento(int a[10], int x, int k)
 {
+    while(x<k-1)
+    {
+        a[x]=a[x+1];
+        x+=1;
+    }
+    a[k-1]=null;
 
+    return a;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 21
-// Recorrer todos los elementos del vector hacia arriba una  posición,  colocando el elemento que sale de la posición cero en la última posición del vector.
-int (int a[10], int k)
+// Recorrer todos los elementos del vector hacia arriba una  posición. Y el ultimo a la primera posición
+int * recorrer_elementos_arriba(int *a[10], int k)
 {
+    int memoria;
+
+    memoria = a[k-1];
+
+    for (k-=1; k>0; k--)
+    {
+        a[k] = a[k-1];
+    }
+
+    a[0]=memoria;
+
+    return a;
 
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 22
-// Recorrer todos los elementos del vector hacia abajo un posición,  colocando el elemento que sale de la última posición en la posición cero del vector.
-int (int a[10], int k)
+// Recorrer todos los elementos del vector hacia abajo un posición, Y el primero en la última posición
+int * recorrer_elementos_abajo(int *a[10], int k)
 {
+    int i, memoria;
+
+    memoria = a[0];
+
+    for (i=0; i<k-1; i++)
+    {
+        a[i] = a[i+1];
+    }
+
+    a[k-1]=memoria;
+
+    return a;
 
 }
 
