@@ -30,7 +30,7 @@ bool primo(int p)
         if(p%i == 0)
             return false; 
     }
-    return true
+    return true;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -41,7 +41,7 @@ void llena_arreglo(int a[10], int k)
     int i=0;
     while(i<k)
     {
-      printf("\n teclee el numero: ",i);
+      printf("\n teclee el numero: ");
       scanf("%d",&a[i]);
       i++;  
     } 
@@ -207,7 +207,7 @@ int * ordenar_arreglo(int *a[10], int k)
 // Ejercicio 11
 // Realizar una búsqueda secuencial de un elemento dentro del arreglo y regresar la posición en donde se encuentra
 // o bien un -1 en caso de que no se encuentre.
-int busqueda_elemento(int a[10], int k, int elemeno)
+int busqueda_elemento(int a[10], int k, int elemento)
 {
     int i=0;
     int posicion = -1;
