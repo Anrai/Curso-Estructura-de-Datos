@@ -75,9 +75,9 @@ void mostrar_arreglo_alreves(int a[10], int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 4
 // Mostrar el/los elementos cetrales del arreglo
-int * mostrar_elemento_central(int a[10], int k)
+int * mostrar_elemento_central(int a[], int k)
 {
-    int *b[2];
+    static int b[2];
     int x,y;
 
     if(k%2 > 0) // Solo hay un elemento central
@@ -122,10 +122,10 @@ void recorrer_arreglo_centro(int a[10], int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 6
 // Recorrer el arreglo del centro a los extremos
-void recorrer_arreglo_extremos(int a[10], int k)
+int * recorrer_arreglo_extremos(int a[10], int k)
 {
-    int *centro[2];
-    centro = mostrar_elemento_central(a,k);
+    static int *centro;
+    centro = mostrar_elemento_central(a,2);
 
     while(centro[0]>=0)
     {
@@ -137,7 +137,10 @@ void recorrer_arreglo_extremos(int a[10], int k)
     }
     if(centro[1]<k)
         cout << "\n x[" << centro[1] << "]:" << a[centro[1]];
+
+    return centro;
 }
+/*
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 7
@@ -185,7 +188,7 @@ int calcular_ocurrencias(int a[10], int k)
 // Ejercicio 10
 // Diseñar un algoritmo que inserte de manera ordenada los elementos en un vector (considere que debe buscar
 // la posición de inserción y abrir el hueco para insertar el elemento).
-int * ordenar_arreglo(int *a[10], int k)
+int * ordenar_arreglo(int a[10], int k)
 {
     int i=1, memoria;
 
@@ -230,7 +233,7 @@ int * multiplicacion_arreglos(int a[], int b[], int x, int y)
     if (x>tamano)
         tamano=x;
 
-    int *multiplicacion[tamano];
+    static int multiplicacion[tamano];
 
     while(i<tamano)
     {
@@ -255,7 +258,7 @@ int * suma_cruzada_arreglos(int a[], int b[], int x, int y)
         tamano=x;
     int j=tamano;
 
-    int *suma[tamano];
+    static int suma[tamano];
 
     while(i<tamano)
     {
@@ -302,15 +305,24 @@ int elemento_mayor(int a[10], int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 15
 // Buscar el elemento menor dentro del vector.
-int (int a[10], int k)
+int elemento_menor(int a[10], int k)
 {
+    int i=0, menor=99999999999999999;
 
+    while(i<k)
+    {
+        if(a[i]<menor)
+            menor=a[i];
+        i+=1;
+    }
+
+    return menor;
 }
 
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 16
 // Calcular la desviación estandar de los elementos del arreglo, con el valor de la media calculado en el problema 8.
-int (int a[10], int k)
+int calcular_desviasion_estandar(int a[10], int k)
 {
     int i=0, menor=99999999999999999;
 
@@ -328,7 +340,7 @@ int (int a[10], int k)
 // Ejercicio 17
 // Determinar si cada elemento en el vector es un número primo o no, si todos los elementos son primos contestar
 // que el arreglo es primo, en caso contrario indicar que no lo es.
-bool (int a[10], int k)
+bool elementos_primos(int a[10], int k)
 {
     int i=0;
 
@@ -344,7 +356,7 @@ bool (int a[10], int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 18
 // Determinar si dos vectores son iguales ( para serlo, los elementos en posiciones iguales deberá ser iguales.)
-int arreglo_primo(int a[10], int b[10], int k)
+bool arreglos_iguales(int a[10], int b[10], int k)
 {
     int i;
 
@@ -361,7 +373,7 @@ int arreglo_primo(int a[10], int b[10], int k)
 // Ejercicio 19
 // Intercambiar dos elementos cualesquiera dentro del vector, dando como parámetros de entrada los elementos a intercambiar
 // (verifique primero si los elementos están contenidos en el vector para poder intercambiarlos).
-int *intercambiar_elemenots(int *a[10], int x, int y, int, k)
+int * intercambiar_elemenots(int a[10], int x, int y, int, k)
 {
     int memoria;
 
@@ -377,7 +389,7 @@ int *intercambiar_elemenots(int *a[10], int x, int y, int, k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 20
 // Eliminar un elemento del arreglo, reduciendo el número de elementos almacenados y cerrando el hueco en el vector.
-int *eliminar_elemento(int a[10], int x, int k)
+int * eliminar_elemento(int a[10], int x, int k)
 {
     while(x<k-1)
     {
@@ -392,7 +404,7 @@ int *eliminar_elemento(int a[10], int x, int k)
 //--------------------------------------------------------------------------------------- 
 // Ejercicio 21
 // Recorrer todos los elementos del vector hacia arriba una  posición. Y el ultimo a la primera posición
-int * recorrer_elementos_arriba(int *a[10], int k)
+int * recorrer_elementos_arriba(int a[10], int k)
 {
     int memoria;
 
@@ -428,19 +440,18 @@ int * recorrer_elementos_abajo(int *a[10], int k)
     return a;
 
 }
-
-
+*/
 //--------------------------------------------------------------------------------------- 
 // Programa Principal 
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
-
+/*
     int a[10] = {0,1,2,3,4,5,6,7,8,9};
     int k=10;
 
 
     calcular_suma_elementos(a, k);
-
+*/
     system("pause");
     return 0;
 }
