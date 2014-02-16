@@ -45,9 +45,43 @@ bool pila_llena(int sp)
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que hace push en la pila
+// Función que hace push de integer en la pila
 //---------------------------------------------------------------------------------------
-bool push(char stack[MAX], int *sp, char dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición
+bool push_int(int stack[MAX], int *sp, int dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición
+{
+	int st=false;
+
+	if(!pila_llena(*sp))
+	{
+		*sp=*sp-1;
+		stack[*sp]=dato;
+		st=true;
+	}
+
+	return st;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que hace pop de integer en la pila
+//---------------------------------------------------------------------------------------
+bool pop_int(int stack[MAX], int *sp, int *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
+{
+	int st=false;
+
+	if(!pila_vacia(*sp))
+	{
+		*dato=stack[*sp];
+		*sp=*sp+1;
+		st=true;
+	}
+
+	return st;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que hace push de char en la pila
+//---------------------------------------------------------------------------------------
+bool push_char(char stack[MAX], int *sp, char dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición
 {
 	bool st=false;
 
@@ -62,9 +96,9 @@ bool push(char stack[MAX], int *sp, char dato) // Push y Pop siempre se pasa con
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que hace pop en la pila
+// Función que hace pop de char en la pila
 //---------------------------------------------------------------------------------------
-bool pop(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
+bool pop_char(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
 {
 	bool st=false;
 
@@ -76,31 +110,6 @@ bool pop(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pasa con
 	}
 
 	return st;
-}
-
-//--------------------------------------------------------------------------------------- 
-// Función que imprime todos los valores de una pila
-//---------------------------------------------------------------------------------------
-void pp(char stack[MAX], int sp)
-{
-	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
-	char p1[MAX], d;
-	int sp1=MAX;
-	bool k;
-
-	// Vacía la pila original, imprime sus valores, y los mete en una nueva pila
-	while(pop(stack, &sp, &d))
-	{
-		cout << "\n" << d;
-		k = push (p1, &sp1, d);
-	}
-
-	// Regresa los valores a la pila original
-	while(pop(p1, &sp1, &d))
-	{
-		k = push (stack, &sp, d);
-	}
-
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -145,6 +154,7 @@ void comprobacion()
 	{
 		cout << "\nLos parentesis de la expresion ingresada estan MAL balanceados" << endl;
 	}
+
 }
 
 //--------------------------------------------------------------------------------------- 

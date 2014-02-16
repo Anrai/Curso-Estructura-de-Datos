@@ -47,7 +47,7 @@ bool pila_llena(int sp)
 //--------------------------------------------------------------------------------------- 
 // Función que hace push en la pila
 //---------------------------------------------------------------------------------------
-bool push(int stack[MAX], int *sp, int dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición
+bool push_int(int stack[MAX], int *sp, int dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición
 {
 	int st=false;
 
@@ -64,7 +64,7 @@ bool push(int stack[MAX], int *sp, int dato) // Push y Pop siempre se pasa con r
 //--------------------------------------------------------------------------------------- 
 // Función que hace pop en la pila
 //---------------------------------------------------------------------------------------
-bool pop(int stack[MAX], int *sp, int *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
+bool pop_int(int stack[MAX], int *sp, int *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
 {
 	int st=false;
 
@@ -81,7 +81,7 @@ bool pop(int stack[MAX], int *sp, int *dato) // Push y Pop siempre se pasa con r
 //--------------------------------------------------------------------------------------- 
 // Función que imprime todos los valores de una pila
 //---------------------------------------------------------------------------------------
-void pp(int stack[MAX], int sp)
+void pp_int(int stack[MAX], int sp)
 {
 	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
 	int p1[MAX], sp1=MAX, d;
@@ -136,7 +136,7 @@ int main(int argc, char** argv) {
 	//pop(pila, &sp, &d); // d vale 9
 	//pop(pila, &sp, &d); // d vale 7
 
-	pp(pila, sp);
+	pp_int(pila, sp);
 	cout << "\n\n";
 
 
