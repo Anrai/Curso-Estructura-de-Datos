@@ -206,7 +206,7 @@ int realizar_operacion(char signo, int valor1, int valor2)
 //--------------------------------------------------------------------------------------- 
 // Función que hace una operación según los dos dígitos de una pila y su operación (tipo: 23+) (se tiene que hacer return 2+3)
 //---------------------------------------------------------------------------------------
-void evaluarPila(char stack[MAX], int *sp)
+void evaluarExpresion(char expresion[], int largo)
 {
 	// Se hacen dos pilas temporales, una de int para los números y otra de char para los signos.
 	char pila_signos[MAX];
@@ -218,18 +218,21 @@ void evaluarPila(char stack[MAX], int *sp)
 	char tops_char[10]; // Arreglo de numero char donde se guardará temporalmente el dígito char a convertir a int
 	int tops[2]; // Arreglo en el cual voy a meter los dos digitos recuperados como enteros
 	char signo; // Variable que almacenará la operación a realizar
+	int i=0;
 
-	// Se recorre la pila original stack[MAX] y se van metiendo los valores numericos en la pila int y los caracteres en la pila char.
-	
-	while(pop_char(stack, sp, &temp))
+	// Se recorre el arreglo y se van metiendo los valores numericos en la pila int y los caracteres en la pila char
+	while(i<largo)
 	{
-		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/'))
+		temp=expresion[i];
+
+		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == ';'))
 			push_char(pila_signos, &sp_signos, temp);
 		else
 		{
 			tops_char[0]=temp;
 			push_int(pila_numeros, &sp_numeros, atoi(tops_char));
 		}
+		i+=1;
 	}
 
 	// Se buscan los dos últimos numeros de la pila int y el último signo de la fila char.
@@ -237,7 +240,18 @@ void evaluarPila(char stack[MAX], int *sp)
 	signo=find_top_char(pila_signos, sp_signos);
 
 	// Se hace la operación según el signo y utilizando los dos números recuperados y se regresa
-	cout << realizar_operacion(signo, tops[0], tops[1]);
+	cout << realizar_operacion(signo, tops[1], tops[0]);
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que compara dos operadores y dice si el primero tiene prioridad
+//---------------------------------------------------------------------------------------
+bool prioridad(char operador1, char operador2)
+{
+	if(((operador1 == '+') || (operador1 == '-')) && ((operador2 == '*') || (operador1 == '/')))
+		return true; // Retorna verdadero si el operador1 tiene prioridad sobre el operador2
+	else
+		return false;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -254,7 +268,11 @@ int main(int argc, char** argv) {
 	push_char(pila, &sp, '5');
 	push_char(pila, &sp, '+');
 
-	evaluarPila(pila, &sp);
+	char expresion[100];
+
+	cin >> expresion;
+
+	evaluarExpresion(expresion, 3);
 
 /*
 	char operacion[100];
