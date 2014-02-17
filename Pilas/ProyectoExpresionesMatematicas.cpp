@@ -113,6 +113,28 @@ bool pop_char(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pas
 }
 
 //--------------------------------------------------------------------------------------- 
+// Función que imprime todos los valores de una pila
+//---------------------------------------------------------------------------------------
+void pp_char(char stack[MAX], int sp)
+{
+	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
+	char p1[MAX], d;
+	int sp1=MAX;
+	bool k;
+	// Vacía la pila original, imprime sus valores, y los mete en una nueva pila
+	while(pop_char(stack, &sp, &d))
+	{
+		cout << "\n" << d;
+		k = push_char(p1, &sp1, d);
+	}
+	// Regresa los valores a la pila original
+	while(pop_char(p1, &sp1, &d))
+	{
+		k = push_char(stack, &sp, d);
+	}
+}
+
+//--------------------------------------------------------------------------------------- 
 // Función que pide una expresión matemática (y su tamaño en caracteres) y detecta si los paréntesis están bien escritos
 //---------------------------------------------------------------------------------------
 bool comprobacion(char operacion[], int largo)
@@ -244,14 +266,77 @@ void evaluarExpresion(char expresion[], int largo)
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que compara dos operadores y dice si el primero tiene prioridad
+// Función que asigna un valor de prioridad a un operador
 //---------------------------------------------------------------------------------------
-bool prioridad(char operador1, char operador2)
+bool prioridad(char operador)
 {
-	if(((operador1 == '+') || (operador1 == '-')) && ((operador2 == '*') || (operador1 == '/')))
-		return true; // Retorna verdadero si el operador1 tiene prioridad sobre el operador2
-	else
-		return false;
+	int prioridad;
+	switch (operador) {
+		case '+':
+			prioridad=1;
+		break;
+		case '-':
+			prioridad=1;
+		break;
+		case '/':
+			prioridad=2;
+		break;
+		case '*':
+			prioridad=2;
+		break;
+		case ';':
+			prioridad=0;
+		break;
+		case '(':
+			prioridad=0;
+		break;
+		default:
+		// Code
+		break;
+	}
+	return prioridad;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que genera una expresión posfija para ser evaludada
+//---------------------------------------------------------------------------------------
+void generarPosfijo(char expresion[], char posfijo[], int largo) // Se envía una expresión[] y se regresa por posfijo[]
+{
+	// Se hace una pila de signos
+	char pila_signos[MAX];
+	int sp_signos=MAX;
+	char temp, temp2;
+	int contadorPosfijo=0;
+
+	for(int i=0; i<largo; ++i) // Se recorre toda la expresión
+	{
+		temp = expresion[i];
+
+		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == ';') || (temp == '('))
+		{
+			if (pila_vacia(sp_signos) || prioridad(temp)<prioridad(find_top_char(pila_signos, sp_signos)))
+				push_char(pila_signos, &sp_signos, temp);
+		}
+		else if((temp == ')'))
+		{
+			while(pop_char(pila_signos, &sp_signos, &temp2))
+			{
+				if(temp2 != '(')
+				{
+					posfijo[contadorPosfijo]=temp2;
+					contadorPosfijo+=1;
+				}
+			}
+			posfijo[contadorPosfijo]=';';
+			contadorPosfijo+=1;
+		}
+		else
+		{
+			posfijo[contadorPosfijo]=temp;
+			contadorPosfijo+=1;
+		}		
+	}
+
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -268,11 +353,14 @@ int main(int argc, char** argv) {
 	push_char(pila, &sp, '5');
 	push_char(pila, &sp, '+');
 
-	char expresion[100];
+	char expresion[6], posfijo[100];
 
 	cin >> expresion;
 
-	evaluarExpresion(expresion, 3);
+	generarPosfijo(expresion, posfijo, 6);
+
+	cout << endl;
+	cout << posfijo;
 
 /*
 	char operacion[100];
