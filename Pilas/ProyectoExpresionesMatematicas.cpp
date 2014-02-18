@@ -268,30 +268,27 @@ void evaluarExpresion(char expresion[], int largo)
 //--------------------------------------------------------------------------------------- 
 // Función que asigna un valor de prioridad a un operador
 //---------------------------------------------------------------------------------------
-bool prioridad(char operador)
+int prioridad(char operador)
 {
 	int prioridad;
 	switch (operador) {
 		case '+':
-			prioridad=1;
+			prioridad=0; // Menor prioridad
 		break;
 		case '-':
-			prioridad=1;
+			prioridad=0;
 		break;
 		case '/':
-			prioridad=2;
+			prioridad=1;
 		break;
 		case '*':
-			prioridad=2;
-		break;
-		case ';':
-			prioridad=0;
+			prioridad=1;
 		break;
 		case '(':
-			prioridad=0;
+			prioridad=2;
 		break;
 		default:
-		// Code
+			prioridad=2;// Mayor prioridad
 		break;
 	}
 	return prioridad;
@@ -312,12 +309,37 @@ void generarPosfijo(char expresion[], char posfijo[], int largo) // Se envía un
 	{
 		temp = expresion[i];
 
-		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == ';') || (temp == '('))
+		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == '('))
 		{
-			if (pila_vacia(sp_signos) || prioridad(temp)<prioridad(find_top_char(pila_signos, sp_signos)))
+			if(pila_vacia(sp_signos)) // La pila está vacía, entonces se introduce el signo en ella
+			{
 				push_char(pila_signos, &sp_signos, temp);
+			}
+			else if (prioridad(temp)>prioridad(find_top_char(pila_signos, sp_signos))) // La prioridad es mayor, entonces se mete en la pila
+			{
+				push_char(pila_signos, &sp_signos, temp);
+			}
+			else // La prioridad del signo es menor o igal, por lo tanto se saca el valor almacenado, se mete en Posfijo y se introduce el nuevo signo a la pila
+			{
+				pop_char(pila_signos, &sp_signos, &temp2);
+				push_char(pila_signos, &sp_signos, temp);
+				if(temp2 != '(') // Los paréntesis de apertura se ignoran en Posfijo
+				{
+					posfijo[contadorPosfijo]=temp2; 
+					contadorPosfijo+=1;
+				}
+			}
 		}
-		else if((temp == ')'))
+		else if((temp == ')')) // El cierre de paréntesis indica que se debe recuperar el último valor de la pila y colocarlo en Posfijo
+		{
+			pop_char(pila_signos, &sp_signos, &temp2);
+			if(temp2 != '(') // Los paréntesis de apertura se ignoran en Posfijo
+			{
+				posfijo[contadorPosfijo]=temp2; 
+				contadorPosfijo+=1;
+			}
+		}
+		else if((temp == ';')) // El cierre de operación indica que se debe recuperar el último valor (¿o todos?) de la pila (si no está vacía) y colocarlo en Posfijo
 		{
 			while(pop_char(pila_signos, &sp_signos, &temp2))
 			{
@@ -332,11 +354,10 @@ void generarPosfijo(char expresion[], char posfijo[], int largo) // Se envía un
 		}
 		else
 		{
-			posfijo[contadorPosfijo]=temp;
+			posfijo[contadorPosfijo]=temp; // Se mete un numero a Posfijo
 			contadorPosfijo+=1;
-		}		
+		}
 	}
-
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -353,11 +374,11 @@ int main(int argc, char** argv) {
 	push_char(pila, &sp, '5');
 	push_char(pila, &sp, '+');
 
-	char expresion[6], posfijo[100];
+	char expresion[100], posfijo[100];
 
 	cin >> expresion;
 
-	generarPosfijo(expresion, posfijo, 6);
+	generarPosfijo(expresion, posfijo, 100);
 
 	cout << endl;
 	cout << posfijo;
@@ -423,3 +444,18 @@ int main(int argc, char** argv) {
 	// pp(pila, sp); // Imprime todos los valores de una pila
 
 	// Declaro un string "operacion" que almacenará la expresión matemática
+
+
+	/*
+	//Saca todo lo que está en la pila y lo mete en posfijo (caso;)
+	while(pop_char(pila_signos, &sp_signos, &temp2))
+			{
+				if(temp2 != '(')
+				{
+					posfijo[contadorPosfijo]=temp2;
+					contadorPosfijo+=1;
+				}
+			}
+			posfijo[contadorPosfijo]=';';
+			contadorPosfijo+=1;
+	*/
