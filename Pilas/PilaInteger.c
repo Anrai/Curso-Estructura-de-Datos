@@ -88,16 +88,16 @@ void pp_int(int stack[MAX], int sp)
 	bool k;
 
 	// Vacía la pila original, imiprime sus valores, y los mete en una nueva pila
-	while(pop(stack, &sp, &d))
+	while(pop_int(stack, &sp, &d))
 	{
 		cout << "\n" << d;
-		k = push (p1, &sp1, d);
+		k = push_int(p1, &sp1, d);
 	}
 
 	// Regresa los valores a la pila original
-	while(pop(p1, &sp1, &d))
+	while(pop_int(p1, &sp1, &d))
 	{
-		k = push (stack, &sp, d);
+		k = push_int(stack, &sp, d);
 	}
 
 }
@@ -112,27 +112,14 @@ int main(int argc, char** argv) {
 	int pila[MAX], sp=MAX, d;
 	bool k;
 
-	push(pila, &sp, 7);
-	push(pila, &sp, 9);
-	push(pila, &sp, 8);
-	push(pila, &sp, 1);
-	push(pila, &sp, 6);
-	push(pila, &sp, 4);
-	push(pila, &sp, 3);
-	push(pila, &sp, 7);
-	push(pila, &sp, 9);
-	push(pila, &sp, 8);
-	push(pila, &sp, 1);
-	push(pila, &sp, 6);
-	push(pila, &sp, 4);
-	push(pila, &sp, 3);
-	push(pila, &sp, 7);
-	push(pila, &sp, 9);
-	push(pila, &sp, 8);
-	push(pila, &sp, 1);
-	push(pila, &sp, 6);
-	push(pila, &sp, 4);
-	push(pila, &sp, 3);
+	push_int(pila, &sp, 9);
+	push_int(pila, &sp, 8);
+	push_int(pila, &sp, 7);
+	push_int(pila, &sp, 6);
+	push_int(pila, &sp, 5);
+	push_int(pila, &sp, 4);
+	push_int(pila, &sp, 3);
+
 	//pop(pila, &sp, &d); // d vale 9
 	//pop(pila, &sp, &d); // d vale 7
 

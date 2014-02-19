@@ -3,7 +3,7 @@
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 17-Febrero-2014                                       
+// Fecha: 19-Febrero-2014                                       
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
