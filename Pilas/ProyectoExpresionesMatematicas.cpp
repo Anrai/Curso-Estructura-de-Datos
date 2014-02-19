@@ -113,7 +113,35 @@ bool pop_char(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pas
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que imprime todos los valores de una pila
+// Función que imprime todos los valores de una pila int
+//---------------------------------------------------------------------------------------
+void pp_int(int stack[MAX], int sp)
+{
+	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
+	int p1[MAX], sp1=MAX, d;
+	bool k;
+
+	cout << "Inicia impresion de pila" << endl;
+
+	// Vacía la pila original, imiprime sus valores, y los mete en una nueva pila
+	while(pop_int(stack, &sp, &d))
+	{
+		cout << d << endl;
+		k = push_int(p1, &sp1, d);
+	}
+
+	cout << "Termina impresion de pila" << endl;
+
+	// Regresa los valores a la pila original
+	while(pop_int(p1, &sp1, &d))
+	{
+		k = push_int(stack, &sp, d);
+	}
+
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que imprime todos los valores de una pila char
 //---------------------------------------------------------------------------------------
 void pp_char(char stack[MAX], int sp)
 {
@@ -230,9 +258,7 @@ int realizar_operacion(char signo, int valor1, int valor2)
 //---------------------------------------------------------------------------------------
 void evaluarExpresion(char expresion[], int largo)
 {
-	// Se hacen dos pilas temporales, una de int para los números y otra de char para los signos.
-	char pila_signos[MAX];
-	int sp_signos=MAX;
+	// Se hace una pila temporal de int para los números a evaluar
 	int pila_numeros[MAX];
 	int sp_numeros=MAX;
 
@@ -240,29 +266,37 @@ void evaluarExpresion(char expresion[], int largo)
 	char tops_char[10]; // Arreglo de numero char donde se guardará temporalmente el dígito char a convertir a int
 	int tops[2]; // Arreglo en el cual voy a meter los dos digitos recuperados como enteros
 	char signo; // Variable que almacenará la operación a realizar
-	int i=0;
+	int i=0, operacion, d;
 
-	// Se recorre el arreglo y se van metiendo los valores numericos en la pila int y los caracteres en la pila char
+	// Se recorre el arreglo y se van metiendo los valores numericos en la pila int o realizando las operaciones
 	while(i<largo)
 	{
 		temp=expresion[i];
 
-		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == ';'))
-			push_char(pila_signos, &sp_signos, temp);
+		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/'))
+		{
+			find_tops_int(pila_numeros, sp_numeros, tops);
+			operacion=realizar_operacion(temp, tops[1], tops[0]);
+			pop_int(pila_numeros, &sp_numeros, &d);
+			pop_int(pila_numeros, &sp_numeros, &d);
+			push_int(pila_numeros, &sp_numeros, operacion);
+		}
+		else if((temp == ';'))
+		{
+			break;
+		}
 		else
 		{
 			tops_char[0]=temp;
 			push_int(pila_numeros, &sp_numeros, atoi(tops_char));
 		}
 		i+=1;
+
+		// pp_int(pila_numeros, sp_numeros); // Por si se quiere saber qué hay en la pila en este momento
 	}
 
-	// Se buscan los dos últimos numeros de la pila int y el último signo de la fila char.
-	find_tops_int(pila_numeros, sp_numeros, tops);
-	signo=find_top_char(pila_signos, sp_signos);
-
-	// Se hace la operación según el signo y utilizando los dos números recuperados y se regresa
-	cout << realizar_operacion(signo, tops[1], tops[0]);
+	// Se imprime el resultado final
+	cout << "Evaluacion final: " << operacion << endl;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -375,13 +409,15 @@ int main(int argc, char** argv) {
 	push_char(pila, &sp, '+');
 
 	char expresion[100], posfijo[100];
-
+	cout << "Ingrese una expresion matematica: ";
 	cin >> expresion;
 
 	generarPosfijo(expresion, posfijo, 100);
+	cout << "Conversion a posfijo: " << posfijo << endl;
+	evaluarExpresion(posfijo, 100);
 
 	cout << endl;
-	cout << posfijo;
+	// cout << posfijo;
 
 /*
 	char operacion[100];
