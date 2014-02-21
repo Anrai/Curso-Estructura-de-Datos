@@ -3,7 +3,7 @@
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 17-Febrero-2014                                       
+// Fecha: 19-Febrero-2014                                       
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -113,7 +113,35 @@ bool pop_char(char stack[MAX], int *sp, char *dato) // Push y Pop siempre se pas
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que imprime todos los valores de una pila
+// Función que imprime todos los valores de una pila int
+//---------------------------------------------------------------------------------------
+void pp_int(int stack[MAX], int sp)
+{
+	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
+	int p1[MAX], sp1=MAX, d;
+	bool k;
+
+	cout << "Inicia impresion de pila" << endl;
+
+	// Vacía la pila original, imiprime sus valores, y los mete en una nueva pila
+	while(pop_int(stack, &sp, &d))
+	{
+		cout << d << endl;
+		k = push_int(p1, &sp1, d);
+	}
+
+	cout << "Termina impresion de pila" << endl;
+
+	// Regresa los valores a la pila original
+	while(pop_int(p1, &sp1, &d))
+	{
+		k = push_int(stack, &sp, d);
+	}
+
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que imprime todos los valores de una pila char
 //---------------------------------------------------------------------------------------
 void pp_char(char stack[MAX], int sp)
 {
@@ -228,11 +256,9 @@ int realizar_operacion(char signo, int valor1, int valor2)
 //--------------------------------------------------------------------------------------- 
 // Función que hace una operación según los dos dígitos de una pila y su operación (tipo: 23+) (se tiene que hacer return 2+3)
 //---------------------------------------------------------------------------------------
-void evaluarExpresion(char expresion[], int largo)
+int evaluarExpresion(char expresion[], int largo)
 {
-	// Se hacen dos pilas temporales, una de int para los números y otra de char para los signos.
-	char pila_signos[MAX];
-	int sp_signos=MAX;
+	// Se hace una pila temporal de int para los números a evaluar
 	int pila_numeros[MAX];
 	int sp_numeros=MAX;
 
@@ -240,29 +266,37 @@ void evaluarExpresion(char expresion[], int largo)
 	char tops_char[10]; // Arreglo de numero char donde se guardará temporalmente el dígito char a convertir a int
 	int tops[2]; // Arreglo en el cual voy a meter los dos digitos recuperados como enteros
 	char signo; // Variable que almacenará la operación a realizar
-	int i=0;
+	int i=0, operacion, d;
 
-	// Se recorre el arreglo y se van metiendo los valores numericos en la pila int y los caracteres en la pila char
+	// Se recorre el arreglo y se van metiendo los valores numericos en la pila int o realizando las operaciones
 	while(i<largo)
 	{
 		temp=expresion[i];
 
-		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/') || (temp == ';'))
-			push_char(pila_signos, &sp_signos, temp);
+		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/'))
+		{
+			find_tops_int(pila_numeros, sp_numeros, tops);
+			operacion=realizar_operacion(temp, tops[1], tops[0]);
+			pop_int(pila_numeros, &sp_numeros, &d);
+			pop_int(pila_numeros, &sp_numeros, &d);
+			push_int(pila_numeros, &sp_numeros, operacion);
+		}
+		else if((temp == ';'))
+		{
+			break;
+		}
 		else
 		{
 			tops_char[0]=temp;
 			push_int(pila_numeros, &sp_numeros, atoi(tops_char));
 		}
 		i+=1;
+
+		// pp_int(pila_numeros, sp_numeros); // Por si se quiere saber qué hay en la pila en este momento
 	}
 
-	// Se buscan los dos últimos numeros de la pila int y el último signo de la fila char.
-	find_tops_int(pila_numeros, sp_numeros, tops);
-	signo=find_top_char(pila_signos, sp_signos);
-
-	// Se hace la operación según el signo y utilizando los dos números recuperados y se regresa
-	cout << realizar_operacion(signo, tops[1], tops[0]);
+	// Se manda el resultado final
+	return operacion;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -365,97 +399,21 @@ void generarPosfijo(char expresion[], char posfijo[], int largo) // Se envía un
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
 
-	// Inicialización de una pila para almacenar los paréntesis de la expresión matemática
-	char pila[MAX];
-	int sp=MAX, d;
-	bool k;
-
-	push_char(pila, &sp, '3');
-	push_char(pila, &sp, '5');
-	push_char(pila, &sp, '+');
+	// Inicio del programa
 
 	char expresion[100], posfijo[100];
-
+	int resultado;
+	cout << "Ingrese una expresion matematica: ";
 	cin >> expresion;
 
 	generarPosfijo(expresion, posfijo, 100);
+	cout << "Conversion a posfijo: " << posfijo << endl;
+	resultado = evaluarExpresion(posfijo, 100);
 
-	cout << endl;
-	cout << posfijo;
+	cout << "Evaluacion final: " << resultado << endl;
 
-/*
-	char operacion[100];
-
-	cout << "Ingrese una expresion matematica: ";
-	cin >> operacion;
-
-	if(comprobacion(operacion, 100))
-	{
-		cout << "Esta bien escrito";
-	}
-*/
-
-/*
-	int tops[2];
-
-	push_int(pila, &sp, 1);
-	push_int(pila, &sp, 2);
-	push_int(pila, &sp, 3);
-	push_int(pila, &sp, 4);
-	push_int(pila, &sp, 5);
-
-	find_tops_int(pila, sp, tops);
-
-	cout << "Los ultimos tops son: " << tops[0] << " y " << tops[1] << endl;
-
-	find_tops_int(pila, sp, tops);
-	cout << "Los ultimos tops son: " << tops[0] << " y " << tops[1] << endl;
-*/
-/*
-	push_char(pila, &sp, 'a');
-	push_char(pila, &sp, 'b');
-	push_char(pila, &sp, 'c');
-	push_char(pila, &sp, 'd');
-	push_char(pila, &sp, 'e');
-
-	if (find_top_char(pila, sp))
-	{
-		cout << "El valor de top es: " << find_top_char(pila, sp) << endl;
-	}
-	else
-		cout << "error";
-*/
-
+	// Fin del programa
 	cout << "\n\n";
 	system("pause");
 	return 0;
 }
-
-/*
-	push(pila, &sp, 'a');
-	push(pila, &sp, 'b');
-	push(pila, &sp, 'c');
-	push(pila, &sp, 'd');
-	push(pila, &sp, 'e');
-	*/
-	//pop(pila, &sp, &d);
-	//pop(pila, &sp, &d);
-
-	// pp(pila, sp); // Imprime todos los valores de una pila
-
-	// Declaro un string "operacion" que almacenará la expresión matemática
-
-
-	/*
-	//Saca todo lo que está en la pila y lo mete en posfijo (caso;)
-	while(pop_char(pila_signos, &sp_signos, &temp2))
-			{
-				if(temp2 != '(')
-				{
-					posfijo[contadorPosfijo]=temp2;
-					contadorPosfijo+=1;
-				}
-			}
-			posfijo[contadorPosfijo]=';';
-			contadorPosfijo+=1;
-	*/
