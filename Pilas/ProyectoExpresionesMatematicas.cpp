@@ -339,11 +339,11 @@ void generarPosfijo(char expresion[], char posfijo[], int largo) // Se envía un
 				contadorPosfijo+=1;
 			}
 		}
-		else if((temp == ';')) // El cierre de operación indica que se debe recuperar el último valor (¿o todos?) de la pila (si no está vacía) y colocarlo en Posfijo
+		else if((temp == ';')) // El cierre de operación indica que se debe recuperar los valores restantes de la pila (si no está vacía) y colocarlo en Posfijo
 		{
 			while(pop_char(pila_signos, &sp_signos, &temp2))
 			{
-				if(temp2 != '(')
+				if(temp2 != '(') // Los paréntesis de apertura se ignoran en Posfijo
 				{
 					posfijo[contadorPosfijo]=temp2;
 					contadorPosfijo+=1;
