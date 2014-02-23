@@ -1,9 +1,9 @@
-// Nombre del programa: Generador de Cola con funciones básicas
+// Nombre del programa: Estructura de Cola de enteros con funciones básicas
 // Descripción: 
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 21-Febrero-2014
+// Fecha: 23-Febrero-2014
   
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -41,19 +41,20 @@ bool full(int cabeza, int cola)
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que hace push en la pila
+// Función que hace push en la cola
 //---------------------------------------------------------------------------------------
-bool push_int(int queue[MAX], int, cabeza, int *cola, int dato) // El nuevo dato se mete en la cola
+bool push_int(int queue[MAX], int cabeza, int *cola, int dato) // El nuevo dato se mete en la cola
 {
 	if(!full(cabeza, *cola))
 	{
+		queue[*cola]=dato; // El dato se mete en la cola
+		
 		// La cola aumenta en uno su valor, si ya pasó el límite de la cola, ésta regresa al 0
 		if(*cola==MAX-1)
 			*cola=0;
 		else
 			*cola=*cola+1;
 
-		queue[*cola]=dato;
 		return true;
 	}
 	else
@@ -61,44 +62,55 @@ bool push_int(int queue[MAX], int, cabeza, int *cola, int dato) // El nuevo dato
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que hace pop en la cola
+// Función que hace pop desde la cabeza
 //---------------------------------------------------------------------------------------
-bool pop_int(int queue[MAX], int, *cabeza, int cola, int *dato) // Push y Pop siempre se pasa con referencia porque se pasa la posición, el dato se pasa por referencia
+bool pop_int(int queue[MAX], int *cabeza, int cola, int *dato)
 {
-	int st=false;
-
-	if(!pila_vacia(*sp))
+	if(!empty(*cabeza, cola))
 	{
-		*dato=stack[*sp];
-		*sp=*sp+1;
-		st=true;
-	}
+		*dato=queue[*cabeza]; // Se extrae la cabeza y se pasa a "dato"
 
-	return st;
+		if(*cabeza==MAX-1)
+			*cabeza=0;
+		else
+			*cabeza=*cabeza+1;
+
+		return true;
+	}
+	else
+		return false;
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que imprime todos los valores de una pila
+// Función que indica cuantos valores hay en la cola
 //---------------------------------------------------------------------------------------
-void pp_int(int stack[MAX], int sp)
+int largo_cola(int cabeza, int cola)
 {
-	// Inicialización de una pila temporal de almacenamiento para los valores de la pila original
-	int p1[MAX], sp1=MAX, d;
-	bool k;
+	int largo;
 
-	// Vacía la pila original, imiprime sus valores, y los mete en una nueva pila
-	while(pop_int(stack, &sp, &d))
+	if (cola>=cabeza)
+		largo=cola-cabeza;
+	else
+		largo=MAX-cabeza+cola;
+
+	return largo;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que imprime todos los valores de una cola
+//---------------------------------------------------------------------------------------
+void pp_int(int queue[MAX], int cabeza, int cola)
+{
+	int d, i=0;
+
+	// Vacía la cola original desde la cabeza, imprime sus valores, y los regresa a la cola
+	while(i < largo_cola(cabeza, cola))
 	{
-		cout << "\n" << d;
-		k = push_int(p1, &sp1, d);
+		pop_int(queue, &cabeza, cola, &d);
+		cout << d << endl;
+		push_int(queue, cabeza, &cola, d);
+		i+=1;
 	}
-
-	// Regresa los valores a la pila original
-	while(pop_int(p1, &sp1, &d))
-	{
-		k = push_int(stack, &sp, d);
-	}
-
 }
 
 
@@ -110,20 +122,31 @@ int main(int argc, char** argv) {
 	// Inicialización de una cola
 	int queue[MAX], cabeza=0, cola=0, dato; // Cabeza es el primero en salir, Cola es en donde se va a escribir el siguiente
 
-	push_int(queue, &cabeza, &cola, 9);
-	push_int(queue, &cabeza, &cola, 8);
-	push_int(queue, &cabeza, &cola, 7);
-	push_int(queue, &cabeza, &cola, 6);
-	push_int(queue, &cabeza, &cola, 5);
-	push_int(queue, &cabeza, &cola, 4);
-	push_int(queue, &cabeza, &cola, 3);
+	push_int(queue, cabeza, &cola, 1);
+	push_int(queue, cabeza, &cola, 2);
+	push_int(queue, cabeza, &cola, 3);
+	push_int(queue, cabeza, &cola, 4);
+	push_int(queue, cabeza, &cola, 5);
+	push_int(queue, cabeza, &cola, 6);
+	push_int(queue, cabeza, &cola, 7);
+	push_int(queue, cabeza, &cola, 8);
+	push_int(queue, cabeza, &cola, 9);
+	push_int(queue, cabeza, &cola, 10);
+	push_int(queue, cabeza, &cola, 11);
+	push_int(queue, cabeza, &cola, 12);
+	push_int(queue, cabeza, &cola, 13);
+	push_int(queue, cabeza, &cola, 14);
+		pop_int(queue, &cabeza, cola, &dato);
+		pop_int(queue, &cabeza, cola, &dato);
+		pop_int(queue, &cabeza, cola, &dato);
+		pop_int(queue, &cabeza, cola, &dato);
+	push_int(queue, cabeza, &cola, 15);
+	push_int(queue, cabeza, &cola, 16);
+	push_int(queue, cabeza, &cola, 17);
+	push_int(queue, cabeza, &cola, 18);
+	push_int(queue, cabeza, &cola, 19);
 
-	pop_int(queue, &cabeza, &cola, &dato); // d vale 9
-	pop_int(queue, &cabeza, &cola, &dato); // d vale 7
-
-	cout << dato << endl;
-
-	//pp_int(pila, sp); // Para imprimir todos los elementos
+	pp_int(queue, cabeza, cola);
 
 	// Fin del programa
 	cout << "\n\n";
