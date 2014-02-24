@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"print",
+				"print_nodo"
+			],
+			[
+				"llena",
+				"llena_nodo"
+			],
+			[
 				"pri",
 				"prioridad"
 			],
@@ -76,10 +84,13 @@
 	},
 	"file_history":
 	[
+		"/C/Users/174944/Documents/Estructura/Pilas/ProyectoExpresionesMatematicas.cpp",
+		"/C/Users/174944/Documents/Estructura/Colas/ColaYFunciones.cpp",
+		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
 		"/C/Users/174944/Documents/Estructura/Pilas/ComprobacionMatematica.cpp",
+		"/C/Users/174944/Documents/Estructura/Documentos/dis_algoritmos_mientras.doc",
 		"/C/Users/174944/Documents/Estructura/Pilas/PilaChar.cpp",
 		"/C/Users/174944/Documents/Estructura/Pilas/PilaInteger.c",
-		"/C/Users/174944/Documents/Estructura/Pilas/ProyectoExpresionesMatematicas.cpp",
 		"/C/Users/174944/Documents/Interaccion/webApplication/css/style2.css",
 		"/C/Users/174944/Documents/Interaccion/webApplication/css/style.css",
 		"/C/Users/174944/Documents/Interaccion/webApplication/HtmlPage2.html",
@@ -114,7 +125,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -128,6 +139,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"nodo",
 			"find_top_char",
 			"N1",
 			"{\n"
@@ -199,6 +211,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"matema",
+				"Pilas\\ProyectoExpresionesMatematicas.cpp"
+			]
 		],
 		"width": 0.0
 	},
@@ -224,7 +240,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 213.0,
 	"status_bar_visible": true,
 	"template_settings":
