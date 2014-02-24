@@ -275,7 +275,7 @@ int evaluarExpresion(char expresion[], int largo)
 
 		if((temp == '+') || (temp == '-') || (temp == '*') || (temp == '/'))
 		{
-			find_tops_int(pila_numeros, sp_numeros, tops);
+			find_tops_int(pila_numeros, sp_numeros, tops); // Quitar esto y dejar los dos pops y un push
 			operacion=realizar_operacion(temp, tops[1], tops[0]);
 			pop_int(pila_numeros, &sp_numeros, &d);
 			pop_int(pila_numeros, &sp_numeros, &d);
