@@ -1,5 +1,5 @@
-// Nombre del programa: Structs de nodos
-// Descripción: Programa que genera, imprime, elimina y pide structs de nodo
+// Nombre del programa: StructFOpen.cpp
+// Descripción: Struct de alumnos que los carga desde un archivo de texto con fopen
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
