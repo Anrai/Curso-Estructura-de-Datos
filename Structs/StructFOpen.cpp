@@ -17,56 +17,58 @@
 using namespace std;
 
 //--------------------------------------------------------------------------------------- 
-// Se declara una estructura de nodo
+// Se declara una estructura de alumno
 //---------------------------------------------------------------------------------------
-struct nodo{
-	int num;
-	float s;
-	char nom[15];
+struct alumno{
+	char nombre [100], licenciatura[100];
+	int matricula, saldo;
 };
 
 //--------------------------------------------------------------------------------------- 
-// Función que imprime una estructura nodo
+// Funcion que llena una estructura de alumno
 //---------------------------------------------------------------------------------------
-void print_nodo(struct nodo n)
+struct alumno llena_alumno()
 {
-	cout << n.num << endl;
-	cout << n.s << endl;
-	cout << n.nom << endl;
-}
+	struct alumno n;
 
-//--------------------------------------------------------------------------------------- 
-// Funcion que llena una estructura de nodo
-//---------------------------------------------------------------------------------------
-struct nodo llena_nodo()
-{
-	struct nodo n;
-
-	cout << "Ingrese un numero entero: ";
-	cin >> n.num;
-	cout << "Ingrese un flotante: ";
-	cin >> n.s;
-	cout << "Ingrese el nombre: ";
-	cin >> n.nom;
+	cout << "Ingrese el nombre del alumno: ";
+	cin >> n.nombre;
+	cout << "Ingrese la licenciatura del alumno: ";
+	cin >> n.licenciatura;
+	cout << "Ingrese la matricula del alumno: ";
+	cin >> n.matricula;
+	cout << "Ingrese el saldo del alumno: ";
+	cin >> n.saldo;
 
 	return n;
 }
 
 //--------------------------------------------------------------------------------------- 
-// Funcion que elimina una estructura de nodo dentro del arreglo de nodos
+// Función que imprime una estructura alumno
 //---------------------------------------------------------------------------------------
-bool elimina_nodo(struct nodo arregloNodos[], int eliminar)
+void print_alumno(struct alumno n)
+{
+	cout << n.nombre << endl;
+	cout << n.licenciatura << endl;
+	cout << n.matricula << endl;
+	cout << n.saldo << endl;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Funcion que elimina una estructura de alumno dentro del arreglo de alumnos
+//---------------------------------------------------------------------------------------
+bool elimina_alumno(struct alumno arregloAlumnos[], int eliminar)
 {
 	bool recorrer = false;
 
-	for(int i=0; i<20; ++i) // 20 Es el tamaño del arreglo de nodos
+	for(int i=0; i<20; ++i) // 20 Es el tamaño del arreglo de alumno
 	{
-		if (arregloNodos[i].num == eliminar) // Indica se se recorrerán todos los nodos a partir de ahora
+		if (arregloAlumnos[i].matricula == eliminar) // Indica se se recorrerán todos los alumno a partir de ahora
 			recorrer = true;
-		if (recorrer) // Se recorre el nodo superior al actual en el arreglo de nodos
-			arregloNodos[i] = arregloNodos[i+1];
-		if (recorrer && !arregloNodos[i].s) // Si se recorrieron los nodos, el ultimo se borra (con un 0)
-			arregloNodos[i].num = 0;
+		if (recorrer) // Se recorre el nodo superior al actual en el arreglo de alumnos
+			arregloAlumnos[i] = arregloAlumnos[i+1];
+		if (recorrer && !arregloAlumnos[i].matricula) // Si se recorrieron los alumnos, el ultimo se borra (con un 0)
+			arregloAlumnos[i].matricula = 0;
 	}
 
 	if (recorrer)
@@ -80,37 +82,39 @@ bool elimina_nodo(struct nodo arregloNodos[], int eliminar)
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv) {
 
-	struct nodo n1, n2, g[20]; // 20 es el tamaño del arreglo de nodos
+	struct alumno n1, n2, g[20]; // 20 es el tamaño del arreglo de alumnos
 	int opcion, na=0, i, eliminar;
 
 	// Menú de opciones que siempre se muestran
 	while(1){
-		cout << "Que operacion quiere realizar en el arreglo de nodos? " << endl << "1 para insertar, 2 para mostrar, 3 para eliminar ";
+		cout << "Que operacion quiere realizar en el arreglo de alumnos? " << endl << "1 para insertar, 2 para mostrar, 3 para eliminar ";
 		cin >> opcion;
 
 		switch(opcion)
 		{
 			case 1:
-				cout << endl << "-Se le pediran los valores del nuevo nodo: " << endl;
-				g[na]=llena_nodo();
+				cout << endl << "-Se le pediran los valores del nuevo alumno: " << endl;
+				g[na]=llena_alumno();
 				na+=1;
 				break;
 			case 2:
-				cout << endl << "-Se mostraran todos los nodos:" << endl;
+				cout << endl << "-Se mostraran todos los alumnos:" << endl;
 				for(i=0; i<na; ++i)
 				{
-					cout << endl << "Nodo: " << endl;
-					if (g[i].num != 0)
-						print_nodo(g[i]);
+					if (g[i].matricula != 0)
+					{
+						cout << endl << "Alumno: " << endl;
+						print_alumno(g[i]);
+					}
 				}
 				break;
 			case 3:
-				cout << endl << "-Indique que numero de nodo quiere eliminar: ";
+				cout << endl << "-Indique la matricula del alumno que quiere eliminar: ";
 				cin >> eliminar;
-				if (elimina_nodo(g, eliminar))
-					cout << "Se ha eliminado correctamente el nodo " << eliminar << endl << endl;
+				if (elimina_alumno(g, eliminar))
+					cout << "Se ha eliminado correctamente el alumno " << eliminar << endl << endl;
 				else
-					cout << "No se pudo eliminar el nodo " << eliminar << endl << endl;
+					cout << "No se pudo eliminar el alumno " << eliminar << endl << endl;
 				break;
 			default:
 				cout << "-La opcion especificada no existe, intente nuevamente." << endl;

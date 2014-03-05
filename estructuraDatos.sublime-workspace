@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"arre",
+				"arregloNodos"
+			],
+			[
+				"ar",
+				"arregloNodos"
+			],
+			[
+				"arreg",
+				"arregoNodos"
+			],
+			[
 				"print",
 				"print_nodo"
 			],
@@ -48,10 +60,18 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/174944/Documents/Interaccion/formulario.html",
+			"file": "/E/Estructura jacinto/main.cpp",
 			"settings":
 			{
-				"buffer_size": 1355,
+				"buffer_size": 3848,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Structs/StructFOpen.cpp",
+			"settings":
+			{
+				"buffer_size": 4562,
 				"line_ending": "Windows"
 			}
 		}
@@ -92,9 +112,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
+		"/C/Users/174944/Documents/Estructura/Structs/StructFOpen.cpp",
+		"/C/Users/174944/Documents/Interaccion/formulario.html",
 		"/C/Users/174944/Documents/Estructura/Pilas/ProyectoExpresionesMatematicas.cpp",
 		"/C/Users/174944/Documents/Estructura/Colas/ColaYFunciones.cpp",
-		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
 		"/C/Users/174944/Documents/Estructura/Pilas/ComprobacionMatematica.cpp",
 		"/C/Users/174944/Documents/Estructura/Documentos/dis_algoritmos_mientras.doc",
 		"/C/Users/174944/Documents/Estructura/Pilas/PilaChar.cpp",
@@ -133,7 +155,7 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -147,6 +169,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Nodos",
+			"arregloNodos",
+			"nodo",
+			"arrego",
+			"}\n",
 			"nodo",
 			"find_top_char",
 			"N1",
@@ -158,6 +185,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"arreglo"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -168,33 +196,63 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/174944/Documents/Interaccion/formulario.html",
+					"file": "/E/Estructura jacinto/main.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1355,
+						"buffer_size": 3848,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1355,
-								1355
+								229,
+								229
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2451.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Structs/StructFOpen.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4562,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3247,
+								3247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1706.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -241,7 +299,7 @@
 	"project": "estructuraDatos.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
