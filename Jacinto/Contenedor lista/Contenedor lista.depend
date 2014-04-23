@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1397049084 source:c:\users\jacinto\documents\universidad\sexto semestre\estructura de datos v2\c\tareas\contenedor lista\main.cpp
+	<iostream>
+	<vector>
+	<stdlib.h>
+	<stdio.h>
+	<list>
+

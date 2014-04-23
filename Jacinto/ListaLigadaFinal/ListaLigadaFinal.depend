@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1395668652 source:c:\users\jacinto\documents\universidad\sexto semestre\estructura de datos v2\c\tareas\listaligadafinal\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<cstdlib>
+

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1396877056 source:c:\users\jacinto\documents\universidad\sexto semestre\estructura de datos v2\c\tareas\cadena lista\main.cpp
+	<iostream>
+	<list>
+	<string>
+	<cctype>
+
