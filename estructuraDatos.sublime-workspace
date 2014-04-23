@@ -1,0 +1,345 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"arre",
+				"arregloNodos"
+			],
+			[
+				"ar",
+				"arregloNodos"
+			],
+			[
+				"arreg",
+				"arregoNodos"
+			],
+			[
+				"print",
+				"print_nodo"
+			],
+			[
+				"llena",
+				"llena_nodo"
+			],
+			[
+				"pri",
+				"prioridad"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"marg",
+				"margin-left"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"bac",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/E/Estructura jacinto/main.cpp",
+			"settings":
+			{
+				"buffer_size": 3848,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Structs/StructFOpen.cpp",
+			"settings":
+			{
+				"buffer_size": 4562,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 160.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
+		"/C/Users/174944/Documents/Estructura/Structs/StructFOpen.cpp",
+		"/C/Users/174944/Documents/Interaccion/formulario.html",
+		"/C/Users/174944/Documents/Estructura/Pilas/ProyectoExpresionesMatematicas.cpp",
+		"/C/Users/174944/Documents/Estructura/Colas/ColaYFunciones.cpp",
+		"/C/Users/174944/Documents/Estructura/Pilas/ComprobacionMatematica.cpp",
+		"/C/Users/174944/Documents/Estructura/Documentos/dis_algoritmos_mientras.doc",
+		"/C/Users/174944/Documents/Estructura/Pilas/PilaChar.cpp",
+		"/C/Users/174944/Documents/Estructura/Pilas/PilaInteger.c",
+		"/C/Users/174944/Documents/Interaccion/webApplication/css/style2.css",
+		"/C/Users/174944/Documents/Interaccion/webApplication/css/style.css",
+		"/C/Users/174944/Documents/Interaccion/webApplication/HtmlPage2.html",
+		"/C/Users/174944/Documents/Interaccion/webApplication/HtmlPage1.html",
+		"/C/Users/174944/Documents/Interaccion/webApplication/HtmlPage1.html.html",
+		"/C/Users/174944/Documents/Interaccion/webApplication/archivo.html",
+		"/C/Users/174944/Documents/Interaccion/etiquetasBasicas.html",
+		"/C/Users/174944/Documents/Estructura/ListaVectoresFunciones/arreglos.c",
+		"/C/Users/174944/Desktop/estructura/estructura/ListaVectoresFunciones/arreglos.c",
+		"/C/Users/174944/Documents/Interaccion/ejercicio2.html",
+		"/C/Users/174944/Documents/Interaccion/ejercicio1.html",
+		"/C/Users/174944/Documents/Interaccion/listas.html",
+		"/C/Users/174944/Documents/Interaccion/index.html",
+		"/C/Users/174944/Desktop/hola.html",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/EnClase/Pila.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/arreglos.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while49.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while29.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while22.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while21.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while20.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while13.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while12.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while11.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while10.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while9.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while8.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while7.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while6.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while5.c",
+		"/C/Users/174944/Documents/CursoEstructuraDeDatos/ListaWhile1/while4.c"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Nodos",
+			"arregloNodos",
+			"nodo",
+			"arrego",
+			"}\n",
+			"nodo",
+			"find_top_char",
+			"N1",
+			"{\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"arreglo"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/E/Estructura jacinto/main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								229,
+								229
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2451.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Structs/StructFOpen.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4562,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3247,
+								3247
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1706.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "estructuraDatos.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"matema",
+				"Pilas\\ProyectoExpresionesMatematicas.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

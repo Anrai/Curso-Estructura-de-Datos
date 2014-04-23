@@ -99,16 +99,16 @@ int largo_cola(int cabeza, int cola)
 //--------------------------------------------------------------------------------------- 
 // Función que imprime todos los valores de una cola
 //---------------------------------------------------------------------------------------
-void pp_int(int queue[MAX], int cabeza, int cola)
+void pp_int(int queue[MAX], int *cabeza, int *cola)
 {
 	int d, i=0;
 
 	// Vacía la cola original desde la cabeza, imprime sus valores, y los regresa a la cola
-	while(i < largo_cola(cabeza, cola))
+	while(i < largo_cola(*cabeza, *cola))
 	{
-		pop_int(queue, &cabeza, cola, &d);
+		pop_int(queue, cabeza, *cola, &d);
 		cout << d << endl;
-		push_int(queue, cabeza, &cola, d);
+		push_int(queue, *cabeza, cola, d);
 		i+=1;
 	}
 }
@@ -146,7 +146,7 @@ int main(int argc, char** argv) {
 	push_int(queue, cabeza, &cola, 18);
 	push_int(queue, cabeza, &cola, 19);
 
-	pp_int(queue, cabeza, cola);
+	pp_int(queue, &cabeza, &cola);
 
 	// Fin del programa
 	cout << "\n\n";
