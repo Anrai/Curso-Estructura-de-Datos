@@ -203,6 +203,8 @@ void eli_fin(struct alumno *l)
 
 }
 
+// Aquí voy
+
 struct alumno *inserta_orden(struct alumno *l, struct alumno *p)
 {
     struct alumno *r, *q;

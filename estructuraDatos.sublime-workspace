@@ -59,22 +59,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/E/Estructura jacinto/main.cpp",
-			"settings":
-			{
-				"buffer_size": 3848,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Structs/StructFOpen.cpp",
-			"settings":
-			{
-				"buffer_size": 4562,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -112,8 +96,9 @@
 	},
 	"file_history":
 	[
-		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
+		"/E/Estructura jacinto/main.cpp",
 		"/C/Users/174944/Documents/Estructura/Structs/StructFOpen.cpp",
+		"/C/Users/174944/Documents/Estructura/Structs/StructNodo.cpp",
 		"/C/Users/174944/Documents/Interaccion/formulario.html",
 		"/C/Users/174944/Documents/Estructura/Pilas/ProyectoExpresionesMatematicas.cpp",
 		"/C/Users/174944/Documents/Estructura/Colas/ColaYFunciones.cpp",
@@ -155,7 +140,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -196,68 +181,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/E/Estructura jacinto/main.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3848,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								229,
-								229
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2451.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Structs/StructFOpen.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4562,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3247,
-								3247
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1706.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -299,7 +224,7 @@
 	"project": "estructuraDatos.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -336,7 +261,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 213.0,
 	"status_bar_visible": true,
 	"template_settings":

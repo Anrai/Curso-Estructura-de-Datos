@@ -1,5 +1,6 @@
-// Nombre del programa: StructFOPEN.cpp
-// Descripción: Programa que tiene una estructura de alumnos y puede leer y escribir en un archivo.txt
+// Nombre del programa: StructListaLigadaAlumnos.cpp
+// Descripción: Mismo programa que StructArrayAlumnos.cpp pero que los alumnos los guarda en una Lista Ligada
+// Importante: El archivo.txt de esta versión es un poco diferente
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
@@ -11,6 +12,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -19,8 +21,10 @@ using namespace std;
 //---------------------------------------------------------------------------------------
 struct alumno
 {
-    char nombre[100], licenciatura[100];
-    int saldo, matricula;
+    char nombre[20];
+    int edad, matricula;
+    float saldo;
+    struct alumno *sig;
 };
 
 //--------------------------------------------------------------------------------------- 
@@ -28,16 +32,24 @@ struct alumno
 //---------------------------------------------------------------------------------------
 struct alumno llena_alumno()
 {
-    struct alumno a;
+    // Se hace un nuevo alumno de estructura alumno y revisa el tamaño de la lista ligada
+    struct alumno *a;
+    a=(struct alumno*)(malloc(sizeof(alumno)));
 
-    cout<<"\nIngrese Nombre: ";
-    cin>>a.nombre;
-    cout<<"Ingrese Saldo: ";
-    cin>>a.saldo;
-    cout<<"Ingrese Licenciatura: ";
-    cin>>a.licenciatura;
-    cout<<"Ingrese Matricula: ";
-    cin>>a.matricula;
+    if(a == NULL)
+        cout << endl << "No se puede crear el nuevo alumno.";
+    else
+    {
+        cout<<"\nIngrese Nombre: ";
+        cin>>a.nombre;
+        cout<<"Ingrese Saldo: ";
+        cin>>a.saldo;
+        cout<<"Ingrese Edad: ";
+        cin>>a.edad;
+        cout<<"Ingrese Matricula: ";
+        cin>>a.matricula;
+        a.sig=NULL;
+    }
 
     return a;
 }
@@ -45,49 +57,103 @@ struct alumno llena_alumno()
 //--------------------------------------------------------------------------------------- 
 // Función que imprime en consola la información de una estructura tipo alumno
 //---------------------------------------------------------------------------------------
-void print_alumno(struct alumno a){
+void print_alumno(struct alumno *a){
     cout << "\n\t--[IMPRESION DE ALUMNO]--"<< endl;
     cout << "Nombre: "<< a.nombre << endl;
     cout << "Saldo: "<< a.saldo << endl;
-    cout << "Licenciatura: "<< a.licenciatura << endl;
+    cout << "Edad: "<< a.edad << endl;
     cout << "Matricula: "<< a.matricula << endl; 
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que busca por matricula un alumno en el arreglo de estructuras de alumnos y lo elimina
+// Función que Imprime cada uno de los nodos de la lista ligada
 //---------------------------------------------------------------------------------------
-int elimina_alumno(struct alumno g[20], int na) // g=arreglo con alumnos, na=numero de alumnos
+void print_lista(struct alumno *r) // Puntero del primer nodo de la lista ligada
 {
-    int indice=-1, i, j, x; // x=matricula del alumno que se quiere borrar, indice=indice del alumno en el arreglo, i y j son contadores
-
-    cout << "\nIntroduzca la matricula del alumno a eliminar: ";
-    cin >> x;
-
-    // Se busca el indice del alumno que se quiere eliminar en el arreglo
-    for(i=0; i<na; i++)
+    while(r != NULL)
     {
-        if(x==g[i].matricula)
-            indice=i;
+        print_alumno(r);
+        r=r->sig;
     }
-
-    // Si se encontró el alumno, éste se elimina (recorriendo los demás alumnos)
-    if(indice!=-1)
-    {
-        for(j=indice; j<na; j++)
-        {
-            g[j] = g[j+1];
-        }
-    }
-
-    return indice;
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que lee un archivo.txt y guarda los datos en un arreglo tipo struct alumno
+// Función que Inserta un nuevo Alumno al principio de la lista ligada
 //---------------------------------------------------------------------------------------
-int leer_fopen(struct alumno a[20])
+struct alumno *ins_ini(struct alumno *a, struct alumno *p) // a es el viejo primer nodo, p es el neuvo primer nodo
+{
+    // Si no hay alumnos todavía, el segundo argumento (*p) será el primer nodo de la lista 
+    if(a == NULL)
+        a = p; // Son punteros
+    else
+    {
+        // El apuntador siguiente del alumno p será el antiguo primer nodo de la lista
+        // El alumno p será el nuevo primer nodo de la lista ligada
+        p->sig = a;
+        a = p; // Siguen siendo punteros
+    }
+    return a; // Regresa el puntero del nuevo primer nodo de la lista
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que Inserta un nuevo Alumno al final de la lista ligada
+//---------------------------------------------------------------------------------------
+struct alumno *ins_final(struct alumno *l) // *l es el puntero inicial de la lista ligada
+{
+    struct alumno *q, *p;
+    p = llena_alumno();
+
+    // Si no hay nodos en la lista, p va a ser el primero
+    if(l == NULL)
+    {
+        l = p;
+    }
+    else
+    {
+        q = l;
+        while(q->sig != NULL)
+        {
+            q = q->sig; // Se recorre la lista para encontrar el nodo final
+        }
+        q->sig = p; // El nodo final ahora apunta al nuevo nodo creado
+    }
+    return l; // Se regresa el puntero del nuevo nodo final
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que elimina el nodo final de la lista ligada de alumnos
+//---------------------------------------------------------------------------------------
+void eli_final(struct alumno *l)
+{
+    struct alumno *m;
+    struct alumno *q;
+
+    m = l; // m es para ir recorriendo la lista hasta encontrar el final
+    q = l;
+
+    while(m != NULL)
+    {
+        if(m->sig == NULL) // Si se llega al final de la lista...
+        {
+            q->sig = NULL; // Cuando se llega al final de la lista, el penultimo nodo apuntará a NULL para indicar que es el nuevo último nodo de la lista ligada
+            free(m); // Se libera el nodo final de la memoria
+        }
+        else
+        {
+            q = m; // q almacena el puntero del nodo actual
+        }
+        m = m->sig; // Se va al siguiente nodo
+    }
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que lee un archivo.txt y guarda los datos en una lista ligada de tipo struct alumno
+//---------------------------------------------------------------------------------------
+struct alumno * leer_archivo()
 {
     int numero, i;
+    struct alumno *l= NULL, *p;
+
     FILE *fp; // Nueva estructura tipo FILE
     fp = fopen("archivo.txt","r"); // Se carga el archivo en fp con la función fopen en modo lectura
 
@@ -103,40 +169,55 @@ int leer_fopen(struct alumno a[20])
         // Almacena toda la información del archivo.txt en el arreglo con estructuras de alumnos
         for(i=0; i<numero; i++)
         {
-            fscanf(fp, "%s", a[i].nombre);
-            fscanf(fp, "%d", &a[i].saldo);
-            fscanf(fp, "%s", a[i].licenciatura);
-            fscanf(fp, "%d", &a[i].matricula);
+            // Se crea una nueva estructura alumno en la lista ligada
+            p = (struct alumno*)(malloc(sizeof(alumno))); 
+            fscanf(fp,"%s", p->nombre);
+            fscanf(fp,"%d", &p->edad);
+            fscanf(fp,"%f", &p->saldo);
+            fscanf(fp,"%d", &p->matricula)
+            p->sig = NULL;
+            l = ins_ini(l, p);
         }
 
         fclose(fp); // Cierra el archivo trabajado
-        return numero; // Regresa el numero de registros indexados
+        return l; // Regresa el puntero al nodo
     }
 }
 
 //--------------------------------------------------------------------------------------- 
 // Función que escribe en un archivo.txt desde un arreglo tipo struct alumno
 //---------------------------------------------------------------------------------------
-void escribe_fopen(struct alumno a[20], int na) // na=número de alumnos
+void guardar_archivo(struct alumno *l)
 {
-    int num=0, i;
+    struct alumno *r;
+    int i=0; // Contador de alumnos
 
     FILE *fp; // Nueva estructura tipo FILE
     fp = fopen("archivo.txt", "w"); // Se abre el archivo en modo escritura
 
+    r=l; // r es cada uno de los nuevos nodos
     if(fp != NULL)
     {
-        fprintf(fp, "%d\n", na); // Primero se escribe el numero de alumnos a indexar
-
-        // Se llena el archivo.txt con los datos de los alumnos que están en el arreglo (con saltos de línea)
-        for(i=0; i<na; i++)
+        // Se cuentan cuantos nodos hay en la lista
+        while (r! = NULL)
         {
-            fprintf(fp, "%s\n", a[i].nombre);
-            fprintf(fp, "%d\n", a[i].saldo);
-            fprintf(fp, "%s\n", a[i].licenciatura);
-            fprintf(fp, "%d\n", a[i].matricula);
+            i++;
+            r = r->sig;
+        }
+        fprintf(fp, "%d\n", i); // Primero se escribe el numero de alumnos a indexar
+
+        // Se llena el archivo.txt con los datos de los alumnos que están en la lista (con saltos de línea)
+        while(l != NULL)
+        {
+            fprintf(fp,"%s\n", l->nombre);
+            fprintf(fp,"%d\n", l->edad);
+            fprintf(fp,"%d\n", l->matricula);
+            fprintf(fp,"%f\n", l->saldo);
+            l = l->sig;
         }
     }
+    else
+        printf("No se pudo crear el archivo!!!");
 
     fclose(fp); // Se cierra el archivo
 }
