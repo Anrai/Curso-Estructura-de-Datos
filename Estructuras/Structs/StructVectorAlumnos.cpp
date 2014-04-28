@@ -23,7 +23,6 @@ struct alumno
 {
     char nombre[100], licenciatura[100];
     int saldo, matricula;
-    struct alumno *sig; // Seguro?
 };
 
 //--------------------------------------------------------------------------------------- 
