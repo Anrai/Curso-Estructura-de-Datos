@@ -43,11 +43,8 @@ void print_vector()
 	{
 		cout<<"\nImpresion"<<endl;
 		cout<<"\nNombre: "<<G[i].nombre<<endl;
-
 		cout<<"\nSaldo: "<<G[i].saldo<<endl;
-
 		cout<<"\nLicenciatura: "<<G[i].licenciatura<<endl;
-
 		cout<<"\nMatricula: "<<G[i].matricula<<endl;
 		cout<<"\nTermina la impresion"<<endl;
 	}
@@ -113,7 +110,7 @@ void cargar_alumnos()
 //--------------------------------------------------------------------------------------- 
 // Funcion que guarda el vector en un archivo de texto
 //---------------------------------------------------------------------------------------
-void guardar_alumnos(vector <alumno> G) // Así se pide un vector de tipo alumno
+void guardar_alumnos(vector <alumno> G) // Así se pide un vector de tipo alumno, pero creo que funciona como una variable global
 {
 	int i=0,j=0;
 	struct alumno *r;
@@ -157,6 +154,8 @@ void eli_orden()
 
 	if(x!=-1)
 	{
+		// begin() regresa el primer iterador del vector
+		// erase() borra los elementos
 		G.erase (G.begin()+x);
 	}
 	else

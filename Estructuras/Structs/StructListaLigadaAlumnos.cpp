@@ -180,7 +180,7 @@ struct alumno *eli_inicio(struct alumno *l)
 }
 
 //--------------------------------------------------------------------------------------- 
-// Función que elimina el alumno segun la matricula ingresada
+// Función que elimina el último nodo de la lista ligada de alumnos
 //---------------------------------------------------------------------------------------
 void eli_final(struct alumno *l)
 {
@@ -205,6 +205,9 @@ void eli_final(struct alumno *l)
     }
 }
 
+//--------------------------------------------------------------------------------------- 
+// Función que elimina el alumno segun la matricula ingresada
+//---------------------------------------------------------------------------------------
 struct alumno *eli_orden(struct alumno *l){
 
     struct alumno *q, *r;
