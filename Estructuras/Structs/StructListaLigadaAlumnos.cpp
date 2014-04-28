@@ -30,7 +30,7 @@ struct alumno
 //--------------------------------------------------------------------------------------- 
 // Función que pide los datos de un alumno y llena una estructura tipo alumno
 //---------------------------------------------------------------------------------------
-struct alumno llena_alumno()
+struct alumno *llena_alumno()
 {
     // Se hace un nuevo alumno de estructura alumno y revisa el tamaño de la lista ligada
     struct alumno *a;
@@ -41,14 +41,14 @@ struct alumno llena_alumno()
     else
     {
         cout<<"\nIngrese Nombre: ";
-        cin>>a.nombre;
+        cin>>a->nombre;
         cout<<"Ingrese Saldo: ";
-        cin>>a.saldo;
+        cin>>a->saldo;
         cout<<"Ingrese Edad: ";
-        cin>>a.edad;
+        cin>>a->edad;
         cout<<"Ingrese Matricula: ";
-        cin>>a.matricula;
-        a.sig=NULL;
+        cin>>a->matricula;
+        a->sig=NULL;
     }
 
     return a;
@@ -59,10 +59,10 @@ struct alumno llena_alumno()
 //---------------------------------------------------------------------------------------
 void print_alumno(struct alumno *a){
     cout << "\n\t--[IMPRESION DE ALUMNO]--"<< endl;
-    cout << "Nombre: "<< a.nombre << endl;
-    cout << "Saldo: "<< a.saldo << endl;
-    cout << "Edad: "<< a.edad << endl;
-    cout << "Matricula: "<< a.matricula << endl; 
+    cout << "Nombre: "<< a->nombre << endl;
+    cout << "Saldo: "<< a->saldo << endl;
+    cout << "Edad: "<< a->edad << endl;
+    cout << "Matricula: "<< a->matricula << endl; 
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -73,7 +73,7 @@ void print_lista(struct alumno *r) // Puntero del primer nodo de la lista ligada
     while(r != NULL)
     {
         print_alumno(r);
-        r=r->sig;
+        r = r->sig;
     }
 }
 
@@ -121,7 +121,66 @@ struct alumno *ins_final(struct alumno *l) // *l es el puntero inicial de la lis
 }
 
 //--------------------------------------------------------------------------------------- 
+// Función que inserta un nuevo alumno, ordenado en la lista según su matrícula
+//---------------------------------------------------------------------------------------
+struct alumno * ins_orden(struct alumno *lista, struct alumno *nuevoNodo)
+{
+    struct alumno *nodoRecorrido, *nodoAnterior;
+    nodoRecorrido = lista;
+
+    if(lista == NULL)
+    {
+        // El nuevo alumno es el único
+        lista = nuevoNodo;
+    }
+    else
+    {
+        // Se recorre la lista
+        while(nodoRecorrido->sig != NULL && nodoRecorrido->matricula < nuevoNodo->matricula)
+        {
+            nodoAnterior = nodoRecorrido;
+            nodoRecorrido = nodoRecorrido->sig;
+        }
+
+        // Nuevo nodo al inicio
+        if(lista->matricula >= nuevoNodo->matricula)
+        {
+            nuevoNodo->sig = lista;
+            lista = nuevoNodo;
+        }
+        // Nuevo nodo al final
+        else if(nodoRecorrido->sig == NULL)
+        {
+            nodoRecorrido->sig = nuevoNodo;
+        }
+        // Nuevo nodo en medio
+        else
+        {
+            nuevoNodo->sig = nodoRecorrido;
+            nodoAnterior->sig = nuevoNodo;
+        }
+    }
+
+    return lista;
+}
+
+//--------------------------------------------------------------------------------------- 
 // Función que elimina el nodo final de la lista ligada de alumnos
+//---------------------------------------------------------------------------------------
+struct alumno *eli_inicio(struct alumno *l)
+{
+    struct alumno *p; // Puntero temporal para borrar el nodo
+    if(l != NULL) // Si existe el nodo, entonces se elimina
+    {
+        p = l; // Se guarda el primer nodo en el temporal
+        l = l->sig; // El nodo siguiente ahora es el primero
+        free(p); // Se libero memoria que contenía el primer nodo antiguo
+    }
+    return l; // Se regresa el puntero del nuevo primer nodo
+}
+
+//--------------------------------------------------------------------------------------- 
+// Función que elimina el alumno segun la matricula ingresada
 //---------------------------------------------------------------------------------------
 void eli_final(struct alumno *l)
 {
@@ -146,13 +205,43 @@ void eli_final(struct alumno *l)
     }
 }
 
+struct alumno *eli_orden(struct alumno *l){
+
+    struct alumno *q, *r;
+    int matricula;
+
+    printf("\nMatricula a eliminar: ");
+    scanf("%d",&matricula);
+    if(l==NULL){
+        printf("\n Vacia");
+    }
+    else{
+        q=l;
+        if (q->matricula==matricula){
+            l=q->sig;
+        }
+        else{
+            while(q!=NULL && q->matricula!=matricula){
+                r=q; q=q->sig;
+            }
+            if(q==NULL){
+                printf("\n No existe la matricula en la lista");
+            }
+            else{
+                r->sig=q->sig;
+            }
+        }
+    }
+    return l;
+}
+
 //--------------------------------------------------------------------------------------- 
 // Función que lee un archivo.txt y guarda los datos en una lista ligada de tipo struct alumno
 //---------------------------------------------------------------------------------------
 struct alumno * leer_archivo()
 {
     int numero, i;
-    struct alumno *l= NULL, *p;
+    struct alumno *l = NULL, *p;
 
     FILE *fp; // Nueva estructura tipo FILE
     fp = fopen("archivo.txt","r"); // Se carga el archivo en fp con la función fopen en modo lectura
@@ -174,9 +263,9 @@ struct alumno * leer_archivo()
             fscanf(fp,"%s", p->nombre);
             fscanf(fp,"%d", &p->edad);
             fscanf(fp,"%f", &p->saldo);
-            fscanf(fp,"%d", &p->matricula)
+            fscanf(fp,"%d", &p->matricula);
             p->sig = NULL;
-            l = ins_ini(l, p);
+            l = ins_ini(l, p); // Se van insertando al inicio, l es el puntero del principio, p es el nuevo nodo
         }
 
         fclose(fp); // Cierra el archivo trabajado
@@ -199,7 +288,7 @@ void guardar_archivo(struct alumno *l)
     if(fp != NULL)
     {
         // Se cuentan cuantos nodos hay en la lista
-        while (r! = NULL)
+        while (r != NULL)
         {
             i++;
             r = r->sig;
@@ -230,15 +319,19 @@ int menu()
     int opcion;
 
     cout<<"\n\n---------------------------------------------";
-    cout<<"\n\t--[MENU DE ESTRUCTURAS DINAMICAS]--";
+    cout<<"\n\t--[MENU DE LISTA LIGADA]--";
     cout<<"\n---------------------------------------------\n\n";
 
-    cout<<"1.-Inserta nuevo alumno"<<endl;
-    cout<<"2.-Imprime todos los alumnos"<<endl;
-    cout<<"3.-Elimina un alumno"<<endl;
-    cout<<"4.-Cargar alumnos desde archivo.txt"<<endl;
-    cout<<"5.-Guardar alumnos en archivo.txt"<<endl;
-    cout<<"6.-Salir"<<endl<<endl;
+    cout<<"1.-Inserta nuevo alumno al inicio"<<endl;
+    cout<<"2.-Inserta nuevo alumno al final"<<endl;
+    cout<<"3.-Imprime todos los alumnos"<<endl;
+    cout<<"4.-Elimina el primer alumno"<<endl;
+    cout<<"5.-Elimina el ultimo alumno"<<endl;
+    cout<<"6.-Inserta un alumno en orden segun su matricula"<<endl;
+    cout<<"7.-Elimina un alumno segun su matricula"<<endl;
+    cout<<"8.-Cargar alumnos desde archivo.txt"<<endl;
+    cout<<"9.-Guardar alumnos en archivo.txt"<<endl;
+    cout<<"10.-Salir"<<endl<<endl;
 
     cout << "Introduzca una opcion: ";
     cin >> opcion;
@@ -251,11 +344,9 @@ int menu()
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
-    int na=0, opcion, i, m;
-    float prueba;
-    struct alumno g[20];
-
-    FILE *fp;
+    struct alumno *lista, *p; // Alumno es nuevo nodo, lista es el puntero del primer nodo de una lista, p es un puntero temporal para nuevos nodos
+    int i, opcion;
+    lista = NULL; // La lista comienza vacía
 
     // Se muestra el menú y se procede con la opción elegida
     do
@@ -266,52 +357,72 @@ int main(int argc, char** argv)
         {
             case 1:
             {
-                // Nuevo alumno en el arreglo de estructura de alumnos
-                g[na]=llena_alumno();
-                na++;
+                // Insertar nuevo alumno al inicio
+                p = llena_alumno();
+                lista = ins_ini(lista, p); // p lo mete al principio de lista
                 break;
             }
 
             case 2:
             {
-                // Se recorre el arreglo de estructura de alumnos y se imprime cada uno de los registos
-                for(i=0; i<na; i++)
-                {
-                    print_alumno(g[i]);
-                }
+                // Insertar nuevo alumno al final
+                lista = ins_final(lista); // Ahí mismo se llama a llena_alumno
                 break;
             }
 
             case 3:
             {
-                // Se elimina un alumno, se pasa el arreglo y la cantidad de alumnos del arreglo
-                m = elimina_alumno(g, na);
-                if(m==-1)
-                    cout<<"\nNo se elimino"<<endl;
-                else
-                {
-                    na--;
-                    cout<<"\nSi se elimino"<<endl;
-                }
+                // Imprime todos los alumnos
+                print_lista(lista);
                 break;
             }
 
             case 4:
             {
-                // Lee el archivo.txt y guarda la información en el arreglo de estructura de alumnos
-                na = leer_fopen(g);
-                cout << "\nSe guardaron "<< na << " nuevos alumnos exitosamente." << endl;
+                // Elimina el primer alumno
+                lista = eli_inicio(lista);
                 break;
             }
 
             case 5:
             {
-                // Se guardan los datos del arreglo de estructura de alumnos en el archivo.txt
-                escribe_fopen(g, na);
+                // Elimina el último alumno
+                eli_final(lista);
+                break;
             }
+
+            case 6:
+            {
+                // Inserta un nuevo alumno, ordenándolo según su matrícula
+                p = llena_alumno();
+                lista = ins_orden(lista, p);
+                break;
+            }
+
+            case 7:
+            {
+                // Elimina un alumno según su matrícula
+                lista = eli_orden(lista);
+                break;
+            }
+
+            case 8:
+            {
+                // Carga alumnos de un archivo.txt y hace una lista nueva
+                lista = leer_archivo();
+                break;
+            }
+
+            case 9:
+            {
+                // Guarda los alumnos de la lista en un archivo.txt
+                guardar_archivo(lista);
+                break;
+            }
+
         }
 
-    }while(opcion != 6);
+    }while(opcion != 10);
 
     // Fin del programa
     cout << "\n\n";
