@@ -20,26 +20,66 @@
 using namespace std;
 
 //--------------------------------------------------------------------------------------- 
-// Nuevo vector (grafo) de listas (la lista tiene un nodo y su valor (distancia) y luego otro nodo)
+// Iterador para listas de enteros para print_nodo()
 //---------------------------------------------------------------------------------------
-list <int>::iterator it; // it es un iterador especial para listas
+ list <int>::iterator it; // it es un iterador especial para listas
 
 //--------------------------------------------------------------------------------------- 
-// Funcion que convierte un renglón de numeros y regresa una lista
+// Estructura de nodo
 //---------------------------------------------------------------------------------------
-list <int> generar_lista(string renglon)
+struct nodo
 {
-    list <int> l; // Nueva lista donde se cargarán los nodos y sus valores respecto a otros nodos
+    int nombre;
+    list <int> nodos;
+    list <int> pesos;
+};
+
+//--------------------------------------------------------------------------------------- 
+// Funcion que recorre una nodo y lo imprime
+//---------------------------------------------------------------------------------------
+void print_nodo(struct nodo p)
+{
+    cout << "[NODO " << p.nombre << "]" << endl;
+
+    // Se recorre la lista
+    for(it=p.nodos.begin(); it != p.nodos.end(); it++)
+    {
+        cout << *it;
+    }
+    cout << endl;
+}
+
+//--------------------------------------------------------------------------------------- 
+// Funcion que convierte un renglón de numeros y regresa un struct de nodo
+//---------------------------------------------------------------------------------------
+struct nodo *generar_lista(int nombre, string renglon)
+{
+    struct nodo *p = new(struct nodo); // Nueva estructura de nodo
+
+    list <int> nodos; // Nueva lista donde se cargarán los nodos
+    list <int> pesos; // Nueva lista donde se cargarán los pesos de los nodos
     char *token;
+    bool nodoPeso = true; // true indica que es nodo y false indica que es false
 
     token = strtok( &renglon[0], " " );
     while( token != NULL )
     {
-        l.push_back(atoi(token)); // Se mete el nuevo dato convertido de char a int en la lista de nodos
+        if(nodoPeso)
+            nodos.push_back(atoi(token)); // Se mete el nuevo dato convertido de char a int en la lista de nodos
+        else
+            pesos.push_back(atoi(token)); // Se mete el nuevo dato convertido de char a int en la lista de pesos de los nodos
+        
         token = strtok( NULL, " " );
+        nodoPeso = !nodoPeso;
     }
 
-    return l;
+    p->nombre = nombre;
+    p->nodos = nodos;
+    p->pesos = pesos;
+
+    print_nodo(*p);
+
+    return p;
 }
 
 //--------------------------------------------------------------------------------------- 
@@ -48,9 +88,9 @@ list <int> generar_lista(string renglon)
 //vector <list <int> > 
 void cargar_grafo()
 {
-    vector <list <int> > G; // G es el identificador de este vector (grafo)
+    vector <struct nodo> G; // G es el identificador de este vector (grafo)
     
-    int nodo; // Para cada nodo se ocupa esta variable temporal
+    int nombreNodo = 1; // Para cada nodo se ocupa esta variable temporal
     char archivo[100];
     string renglon;
 
@@ -73,7 +113,8 @@ void cargar_grafo()
         while(!infile.eof()) // Hasta que se terminen los renglones
         {
             getline(infile, renglon); // Se obtiene un renglon y se guarda en un string
-            G.push_back(generar_lista(renglon)); // Se genera una lista a partir del string y se agrega la nueva lista a un cajón del grafo (vector)
+            G.push_back(*generar_lista(nombreNodo, renglon)); // Se genera una lista a partir del string y se agrega la nueva lista a un cajón del grafo (vector)
+            nombreNodo++;
         }
 
         infile.close(); // Cierra el archivo trabajado
@@ -82,23 +123,7 @@ void cargar_grafo()
     }
 }
 
-//--------------------------------------------------------------------------------------- 
-// Funcion que recorre una lista y la imprime
-//---------------------------------------------------------------------------------------
 /*
-void print_lista(list <struct alumno> l)
-{
-    // Se recorre la lista
-    for(it=l.begin(); it != l.end(); it++)
-    {
-        cout << "[ALUMNO]:" << endl;
-        cout << "Nombre: " << it->nombre << endl;
-        cout << "Saldo: " << it->saldo << endl;
-        cout << "Licenciatura: " << it->licenciatura << endl;
-        cout << "Matricula: " << it->matricula << endl << endl; 
-    }
-}
-
 //--------------------------------------------------------------------------------------- 
 // Funcion que recorre un vector y manda a imprimir la lista dentro del cajon
 //---------------------------------------------------------------------------------------
