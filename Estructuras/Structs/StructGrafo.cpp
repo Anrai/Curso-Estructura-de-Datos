@@ -50,6 +50,22 @@ void print_nodo(struct nodo p)
 }
 
 //--------------------------------------------------------------------------------------- 
+// Funcion que recorre un grafo (vector) y manda a imprimir todos sus nodos
+//---------------------------------------------------------------------------------------
+void print_grafo(vector <struct nodo> G)
+{
+    int i;
+
+    cout << "\n\t--[IMPRESION DE GRAFO]--" << endl << endl;
+
+    // Se recorre cada cajon del vector y se imprime la lista contenida
+    for(i=0; i<G.size(); i++)
+    {
+        print_nodo(G[i]);
+    }
+}
+
+//--------------------------------------------------------------------------------------- 
 // Funcion que convierte un renglón de numeros y regresa un struct de nodo
 //---------------------------------------------------------------------------------------
 struct nodo *generar_lista(int nombre, string renglon)
@@ -77,7 +93,7 @@ struct nodo *generar_lista(int nombre, string renglon)
     p->nodos = nodos;
     p->pesos = pesos;
 
-    print_nodo(*p);
+    //print_nodo(*p);
 
     return p;
 }
@@ -85,8 +101,7 @@ struct nodo *generar_lista(int nombre, string renglon)
 //--------------------------------------------------------------------------------------- 
 // Funcion que carga la información de un archivo y la guarda en el vector
 //---------------------------------------------------------------------------------------
-//vector <list <int> > 
-void cargar_grafo()
+vector <struct nodo> cargar_grafo()
 {
     vector <struct nodo> G; // G es el identificador de este vector (grafo)
     
@@ -121,24 +136,11 @@ void cargar_grafo()
 
         cout << "*Hecho, se agregaron " << G.size() << " listas de nodos en vector." << endl;
     }
+
+    return (G);
 }
 
 /*
-//--------------------------------------------------------------------------------------- 
-// Funcion que recorre un vector y manda a imprimir la lista dentro del cajon
-//---------------------------------------------------------------------------------------
-void print_vector()
-{
-    int i;
-
-    // Se recorre cada cajon del vector y se imprime la lista contenida
-    for(i=0; i<G.size(); i++)
-    {
-        cout << "\n\t--[IMPRESION DE LISTA DE ALUMNOS] [CAJON " << i << "]--" << endl << endl;
-        print_lista(G[i]);
-    }
-}
-
 //--------------------------------------------------------------------------------------- 
 // Función que imprime en consola un menú con las opciones que puede hacer el programa, pregunta la opción y la regresa
 //---------------------------------------------------------------------------------------
@@ -167,7 +169,7 @@ int main(int argc, char** argv)
 {
     while (1)
     {
-        cargar_grafo(); 
+        print_grafo(cargar_grafo());
     }
 
     /*
