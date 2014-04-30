@@ -13,72 +13,79 @@
 #include <list>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fstream>
+#include <string>
+#include <string.h>
 
 using namespace std;
 
 //--------------------------------------------------------------------------------------- 
-// Estructura de alumno
+// Nuevo vector (grafo) de listas (la lista tiene un nodo y su valor (distancia) y luego otro nodo)
 //---------------------------------------------------------------------------------------
-struct alumno
-{
-    char nombre[100], licenciatura[100];
-    int saldo, matricula;
-};
+list <int>::iterator it; // it es un iterador especial para listas
 
 //--------------------------------------------------------------------------------------- 
-// Nuevo vector de listas de alumnos
+// Funcion que convierte un renglón de numeros y regresa una lista
 //---------------------------------------------------------------------------------------
-vector <list <struct alumno> > G; // G es el identificador de este vector
-list <struct alumno>::iterator it; // it es un iterador especial para listas (se ocupa en el print_lista)
+list <int> generar_lista(string renglon)
+{
+    list <int> l; // Nueva lista donde se cargarán los nodos y sus valores respecto a otros nodos
+    char *token;
+
+    token = strtok( &renglon[0], " " );
+    while( token != NULL )
+    {
+        l.push_back(atoi(token)); // Se mete el nuevo dato convertido de char a int en la lista de nodos
+        token = strtok( NULL, " " );
+    }
+
+    return l;
+}
 
 //--------------------------------------------------------------------------------------- 
-// Funcion que carga la información de un archivo y la guarda en una lista en el siguiente cajón dentro del vector
+// Funcion que carga la información de un archivo y la guarda en el vector
 //---------------------------------------------------------------------------------------
-void cargar_alumnos()
+//vector <list <int> > 
+void cargar_grafo()
 {
-    list <struct alumno> l; // Nueva lista donde se cargarán los alumnos
-    struct alumno *p; // Puntero de struct alumno temporal para guardar cada nuevo alumno detectado y después poder pasarlo a la lista
-    int  i, numero;
+    vector <list <int> > G; // G es el identificador de este vector (grafo)
+    
+    int nodo; // Para cada nodo se ocupa esta variable temporal
     char archivo[100];
+    string renglon;
 
-    cout << endl << "Ingrese el nombre de la lista a cargar en un nuevo cajon del vector: ";
+    cout << endl << "Ingrese el nombre de grafo a cargar: ";
     cin >> archivo;
 
-    FILE *fp; // Se genera una nueva estructura de archivo que cargará la información del archivo
-    fp = fopen(archivo, "r"); // Se abre el archivo en modo lectura    
+    // Carga de archivo en infile;
+    ifstream infile; 
+    infile.open(archivo);
 
-    if(fp == NULL)
+    if(!infile.is_open())
     {
         cout << "*No se pudo leer el archivo!" << endl;
     }
     else
     {
-        fscanf(fp,"%d", &numero); // Lee el numero de datos guardados, lo formatea como int y guarda en variable
+        getline(infile, renglon); // Se omite el primer renglon porque fstream no lo necesita
 
-        // Se recorre cada renglón del archivo según cuantos alumnos haya detectado
-        for(i=0; i<numero; i++)
+        // Se recorre cada renglón del archivo
+        while(!infile.eof()) // Hasta que se terminen los renglones
         {
-            struct alumno *p = new(struct alumno); // Nuevo struct alumno que se guardará en la lista
-            fscanf(fp,"%s", p->nombre);
-            fscanf(fp,"%d", &p->saldo);
-            fscanf(fp,"%s", p->licenciatura);
-            fscanf(fp,"%d", &p->matricula);
-
-            // Se agrega el nuevo nodo a la lista de alumnos de este archivo
-            l.push_back(*p);
+            getline(infile, renglon); // Se obtiene un renglon y se guarda en un string
+            G.push_back(generar_lista(renglon)); // Se genera una lista a partir del string y se agrega la nueva lista a un cajón del grafo (vector)
         }
 
-        fclose(fp); // Cierra el archivo trabajado
+        infile.close(); // Cierra el archivo trabajado
 
-        // Se guarda la lista en un nuevo cajón del vector
-        G.push_back(l);
-        cout << "*Hecho, " << numero << " registros en nueva lista del vector en el cajon " << G.size()-1 << "." << endl;
+        cout << "*Hecho, se agregaron " << G.size() << " listas de nodos en vector." << endl;
     }
 }
 
 //--------------------------------------------------------------------------------------- 
 // Funcion que recorre una lista y la imprime
 //---------------------------------------------------------------------------------------
+/*
 void print_lista(list <struct alumno> l)
 {
     // Se recorre la lista
@@ -126,13 +133,19 @@ int menu()
     cin >> opcion;
 
     return opcion;
-}
+}*/
 
 //--------------------------------------------------------------------------------------- 
 // Programa Principal
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
+    while (1)
+    {
+        cargar_grafo(); 
+    }
+
+    /*
     int opcion;
 
     do{
@@ -157,6 +170,7 @@ int main(int argc, char** argv)
         }
 
     } while (opcion != 3);
+    */
 
     // Fin del programa
     cout << "\n\n";
