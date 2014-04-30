@@ -1,11 +1,11 @@
-4
+3
 Felipe
 0
-Dir de Recursos Humanos
+RecursosHumanos
 174412
 Guadalupe
 69
-Animacion Digital
+Animacion
 174321
 Andrea
 19

@@ -1,9 +1,9 @@
-// Nombre del programa: StructVectorListAlumnos.cpp
-// Descripción: Programa que tiene un vector con lista de alumnos por cajón
+// Nombre del programa: StructGrafo.cpp
+// Descripción: Programa que carga un grafo desde una archivo y genera un grafo
 // Responsables: 
 //          Profesor: Dr. Antonio Benitez Ruiz
 //          Alumno: Sergio Enrique Vargas García 
-// Fecha: 29-Abril-2014
+// Fecha: 30-Abril-2014
 
 //--------------------------------------------------------------------------------------- 
 // INCLUDES 
@@ -36,7 +36,7 @@ list <struct alumno>::iterator it; // it es un iterador especial para listas (se
 //---------------------------------------------------------------------------------------
 void cargar_alumnos()
 {
-	list <struct alumno> l; // Nueva lista donde se cargarán los alumnos
+    list <struct alumno> l; // Nueva lista donde se cargarán los alumnos
     struct alumno *p; // Puntero de struct alumno temporal para guardar cada nuevo alumno detectado y después poder pasarlo a la lista
     int  i, numero;
     char archivo[100];
