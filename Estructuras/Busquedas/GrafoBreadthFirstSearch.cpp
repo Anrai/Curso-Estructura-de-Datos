@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <queue>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fstream>
@@ -30,9 +31,23 @@ using namespace std;
 struct nodo
 {
     int nombre;
-    list <int> nodos;
+    list <int> nodos; // Nodos adyacentes (Con los que conecta)
     list <int> pesos;
 };
+
+//--------------------------------------------------------------------------------------- 
+// Funcion que imprime un vector de enteros - FUNCIÓN TEMPORAL PARA PROBAR ALGORITMO BFS
+//---------------------------------------------------------------------------------------
+void print_vector(vector <int>)
+{
+    int i, x;
+
+    // Se recorre el vector
+    for(i=0; i<G.size(); i++)
+    {
+
+    }
+}
 
 //--------------------------------------------------------------------------------------- 
 // Función que recorre un nodo y lo imprime
@@ -75,7 +90,7 @@ struct nodo *generar_lista(int nombre, string renglon)
     list <int> nodos; // Nueva lista donde se cargarán los nodos
     list <int> pesos; // Nueva lista donde se cargarán los pesos de los nodos
     char *token;
-    bool nodoPeso = true; // true indica que es nodo y false indica que es false
+    bool nodoPeso = true; // true indica que es nodo y false indica que es peso
 
     token = strtok( &renglon[0], " " );
     while( token != NULL )
@@ -92,8 +107,6 @@ struct nodo *generar_lista(int nombre, string renglon)
     p->nombre = nombre;
     p->nodos = nodos;
     p->pesos = pesos;
-
-    //print_nodo(*p);
 
     return p;
 }
@@ -140,6 +153,70 @@ vector <struct nodo> cargar_grafo()
     return (G);
 }
 
+//--------------------------------------------------------------------------------------- 
+// Algoritmo BFS - Función que pide un grafo y uno de sus vertices (será la raíz). Regresa un vector de padres de cada nodo.
+//---------------------------------------------------------------------------------------
+//vector <int> 
+void bfs(vector <struct nodo> G, int s) // s=raíz
+{
+    // Muestra primero el grafo en pantalla
+    print_grafo(G);
+
+    //--------------------------------------------------------------------------------------- 
+    // Primera parte de la función
+    //---------------------------------------------------------------------------------------
+
+    // Se declaran las estructuras que se utilizarán
+    vector <int> color; // Es el estado de cada nodo. Indica si ya se recorrió el nodo (0=Blanco, 1=Gris, 2=Negro)
+    vector <int> distancia; // Distancia de un nodo con respecto a la raíz
+    vector <int> padre; // Vector que se regresa. Indica quién es el padre de cada nodo según la raíz
+    queue <int> Q; // Cola que se rellena con los nodos a revisar y se vacía según se vayan revisando.
+    int u; // Nombre del nodo que se estará revisando en el while
+    list <int>::iterator it; // Iterador de lista de adyacencias de un nodo
+
+    // El primer elemento de cada vector no existe
+    color.push_back(-1);
+    distancia.push_back(-1);
+    padre.push_back(-1);
+
+    // Armando las estructuras que se utilizarán
+    for(int i=0; i<G.size(); ++i)
+    {
+        color.push_back(0);
+        distancia.push_back(999);
+        padre.push_back(-1);
+    }
+    // Se especifican los valores de la raíz
+    color[s] = 1;
+    distancia[s] = 0;
+    Q.push(s);
+
+    //--------------------------------------------------------------------------------------- 
+    // Segunda parte de la función (Algoritmo)
+    //---------------------------------------------------------------------------------------
+
+    while(!Q.empty())
+    {
+        u = Q.front(); Q.pop(); // Se extrae y borra el elemento del frente de la cola (El nodo que se está revisando)
+
+        // Se checan todas las adyacencias del nodo que se está revisando (*it=v según algoritmo)
+        for(it=G[u-1].nodos.begin(); it!=G[u-1].nodos.end(); it++) // u-1 porque el nodo 1 se guarda en G[0] y así sucesivamente
+        {
+            if(color[*it] == 0)
+            {
+                color[*it] = 1;
+                distancia[*it] = distancia[u]+1;
+                padre[*it] = u;
+                Q.push(*it);
+            }
+        }
+        color[u] = 2;
+    }
+
+    
+
+}
+
 /*
 //--------------------------------------------------------------------------------------- 
 // Función que imprime en consola un menú con las opciones que puede hacer el programa, pregunta la opción y la regresa
@@ -169,7 +246,7 @@ int main(int argc, char** argv)
 {
     while (1)
     {
-        print_grafo(cargar_grafo());
+        bfs(cargar_grafo(), 2);
     }
 
     /*
