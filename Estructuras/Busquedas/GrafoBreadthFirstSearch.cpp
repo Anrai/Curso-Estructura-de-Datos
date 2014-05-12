@@ -38,14 +38,16 @@ struct nodo
 //--------------------------------------------------------------------------------------- 
 // Funcion que imprime un vector de enteros - FUNCIÓN TEMPORAL PARA PROBAR ALGORITMO BFS
 //---------------------------------------------------------------------------------------
-void print_vector(vector <int>)
+void print_vector(vector <int> color, vector <int> distancia, vector <int> padre)
 {
     int i, x;
 
-    // Se recorre el vector
-    for(i=0; i<G.size(); i++)
-    {
+    cout << "\n\t--[IMPRESION DE VECTORES DE BFS]--" << endl << endl;
 
+    // Se recorre el vector
+    for(i=1; i<padre.size(); i++)
+    {
+        cout << "Nodo " << i << ": Color[" << color[i] << "], Distancia[" << distancia[i] << "], Padre[" << padre[i] << "]" << endl;
     }
 }
 
@@ -55,11 +57,12 @@ void print_vector(vector <int>)
 void print_nodo(struct nodo p)
 {
     cout << "[NODO " << p.nombre << "]" << endl;
+    cout << "Nodos adyacentes: ";
 
     // Se recorre la lista
     for(it=p.nodos.begin(); it != p.nodos.end(); it++)
     {
-        cout << *it;
+        cout << *it << ", ";
     }
     cout << endl;
 }
@@ -194,7 +197,6 @@ void bfs(vector <struct nodo> G, int s) // s=raíz
     //--------------------------------------------------------------------------------------- 
     // Segunda parte de la función (Algoritmo)
     //---------------------------------------------------------------------------------------
-
     while(!Q.empty())
     {
         u = Q.front(); Q.pop(); // Se extrae y borra el elemento del frente de la cola (El nodo que se está revisando)
@@ -213,7 +215,7 @@ void bfs(vector <struct nodo> G, int s) // s=raíz
         color[u] = 2;
     }
 
-    
+    print_vector(color, distancia, padre); // Se imprime un vector para ver que onda
 
 }
 
@@ -244,9 +246,15 @@ int menu()
 //---------------------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
+    vector <struct nodo> G;
+    int raiz;
+
     while (1)
     {
-        bfs(cargar_grafo(), 2);
+        G = cargar_grafo();
+        cout << "\nQue numero de nodo desea tomar como raiz para la busqueda? ";
+        cin >> raiz;
+        bfs(G, raiz);
     }
 
     /*
